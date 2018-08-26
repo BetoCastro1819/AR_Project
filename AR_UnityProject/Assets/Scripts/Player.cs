@@ -8,14 +8,12 @@ public class Player : MonoBehaviour
 
     private Vector3 movement;
     private Vector3 lookAtDir;
-    private Rigidbody rb;
     private bool canMove = false;
 
     private void Start()
     {
         movement = transform.position;
         lookAtDir = transform.position;
-        rb = GetComponent<Rigidbody>();
         canMove = true;
     }
 
@@ -39,11 +37,10 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        //canMove = true;
-
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        // Rotation
         lookAtDir.x = transform.position.x + horizontal;
         lookAtDir.z = transform.position.z + vertical;
 
@@ -54,7 +51,6 @@ public class Player : MonoBehaviour
         }
 
         transform.LookAt(lookAtDir);
-
         transform.position = movement;
     }
 
