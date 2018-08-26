@@ -5,20 +5,18 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
 	public List<GameObject> playerItems;
-	public Transform itemPosition;
-
-	private GameObject currentItem;
-	private int currentItemIndex;
 
 	private const int previousItemIndex = -1;
 	private const int nextItemIndex = 1;
 
+	private GameManager gm;
+	private int currentItemIndex;
 
 	void Start ()
 	{
 		currentItemIndex = 0;
-		currentItem = Instantiate(playerItems[currentItemIndex], itemPosition.position, itemPosition.rotation);
-		currentItem.transform.parent = itemPosition.transform.parent;
+		playerItems[currentItemIndex].SetActive(true);
+		gm = GameManager.GetInstance();
 	}
 	
 	void Update ()
@@ -31,21 +29,23 @@ public class PlayerInventory : MonoBehaviour
 
 	void ChangeItem(int nextOrPrevious)
 	{
-		// Dont allow to change weapon, if there is only 1 in the list
-		if (playerItems.Count > 1)
+		// Dont change item, if there is only 1 possible item to choose
+		if (gm.unlockedItems > 1)
 		{
+			// Deactivate current item
+			playerItems[currentItemIndex].SetActive(false);
+
+			// Change current item to new one
 			currentItemIndex += nextOrPrevious;
 
-			if (currentItemIndex > playerItems.Count - 1)
+			// Goes around the list when index goes off limits
+			if (currentItemIndex > gm.unlockedItems - 1)
 				currentItemIndex = 0;
 			else if (currentItemIndex < 0)
-				currentItemIndex = playerItems.Count - 1;
+				currentItemIndex = gm.unlockedItems - 1;
 
-			GameObject previousItem = currentItem;
-			Destroy(previousItem);
-
-			currentItem = Instantiate(playerItems[currentItemIndex], itemPosition.position, itemPosition.rotation);
-			currentItem.transform.parent = itemPosition.transform.parent;
+			// Activate new item
+			playerItems[currentItemIndex].SetActive(true);
 		}
 	}
 }
