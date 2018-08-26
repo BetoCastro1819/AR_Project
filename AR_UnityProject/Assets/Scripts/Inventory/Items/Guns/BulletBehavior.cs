@@ -34,7 +34,6 @@ public class BulletBehavior : MonoBehaviour
 		if (enemy != null)
 			DamageEnemy(enemy);
 
-		Debug.Log("Bullet was shot into " + obj.collider.name);
 		Destroy(this.gameObject);
 	}
 
