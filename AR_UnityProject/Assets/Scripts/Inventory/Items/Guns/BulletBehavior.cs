@@ -32,13 +32,8 @@ public class BulletBehavior : MonoBehaviour
 		Enemy enemy = obj.gameObject.GetComponent<Enemy>();
 
 		if (enemy != null)
-			DamageEnemy(enemy);
+			enemy.TakeDamage(bulletDamage);
 
 		Destroy(this.gameObject);
-	}
-
-	private void DamageEnemy(Enemy e)
-	{
-		e.health -= bulletDamage;
 	}
 }
