@@ -5,6 +5,7 @@ using UnityEngine;
 public class ZombieBehavior : Enemy
 {
 	private Player player;
+	private Rigidbody rb;
 	private ZombieState state;
 	private bool playerFound = false;
 
@@ -23,8 +24,12 @@ public class ZombieBehavior : Enemy
 			playerFound = true;
 
 		state = ZombieState.IDLE;
+
+		rb = GetComponent<Rigidbody>();
+		SetRigidbody(rb);
+
 	}
-	
+
 	void Update () 
 	{
 		if (health <= 0)

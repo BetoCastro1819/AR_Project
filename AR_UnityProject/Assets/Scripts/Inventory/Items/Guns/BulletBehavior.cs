@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour
 {
 	public float bulletSpeed = 10f;
+	public float knockbackStrength = 10f;
 	public int bulletDamage = 50;
 
 	private Rigidbody rb;
@@ -31,8 +32,11 @@ public class BulletBehavior : MonoBehaviour
 	{
 		Enemy enemy = obj.gameObject.GetComponent<Enemy>();
 
-		if (enemy != null)
+		if (enemy != null) 
+		{
+			enemy.KnockbackEnemy(knockbackStrength);
 			enemy.TakeDamage(bulletDamage);
+		}
 
 		Destroy(this.gameObject);
 	}
