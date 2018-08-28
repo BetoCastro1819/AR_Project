@@ -37,8 +37,8 @@ public class Player : MonoBehaviour
 
     void Movement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+		float horizontal = InputManager.GetInstance().HorizontalAxis();		// Input.GetAxis("Horizontal");
+		float vertical = InputManager.GetInstance().VerticalAxis();		// Input.GetAxis("Vertical");
 
         // Rotation
         lookAtDir.x = transform.position.x + horizontal;
