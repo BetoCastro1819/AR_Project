@@ -5,7 +5,7 @@ using UnityEngine;
 public class ZombieBehavior : Enemy
 {
 	private Player player;
-	private Rigidbody rb;
+	private Rigidbody zombieRb;
 	private ZombieState state;
 	private bool playerFound = false;
 
@@ -18,15 +18,15 @@ public class ZombieBehavior : Enemy
 
 	void Awake () 
 	{
-		// TODO: Make EnemyManager class
+		// TODO: Make EnemyManager class to just look for player ONCE, and not per enemy
 		player = FindObjectOfType<Player>();
 		if (player != null) 
 			playerFound = true;
 
 		state = ZombieState.IDLE;
 
-		rb = GetComponent<Rigidbody>();
-		SetRigidbody(rb);
+		zombieRb = GetComponent<Rigidbody>();
+		SetRigidbody(zombieRb);
 
 	}
 
