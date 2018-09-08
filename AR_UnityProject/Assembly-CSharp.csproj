@@ -75,6 +75,8 @@
     <Compile Include="Assets\Scripts\Inventory\Items\Guns\Guns.cs" />
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_ButtonActions.cs" />
+    <None Include="Assets\Art\Fonts\robot_radicals\license.txt" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Documents/ImageCampus/2018/2C/Desarrollo de Videojuegos para Mobile/AR_Project/AR_UnityProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 94ac76cca99434a46bceee702c9c0ad3
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Robot Radicals
+  fontNames:
+  - Robot Radicals
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8df3b282d915fdd4197b4bfd1837e046, type: 3}
+  - {fileID: 12800000, guid: 6b87baccc5cfd8c4884f5766868d9150, type: 3}
+  - {fileID: 12800000, guid: 6a4c1c6e04f15b947bcc9000f775b516, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
