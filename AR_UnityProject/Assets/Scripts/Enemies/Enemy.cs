@@ -9,6 +9,11 @@ public class Enemy : MonoBehaviour
 
 	private Rigidbody rb;
 
+	private void Start()
+	{
+		GameManager.GetInstance().enemiesAlive++;
+	}
+
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
@@ -17,6 +22,7 @@ public class Enemy : MonoBehaviour
 	public void KillEnemy(GameObject enemy) 
 	{
 		Destroy(enemy);
+		GameManager.GetInstance().enemiesAlive--;
 	}
 
 	public void KnockbackEnemy(float strength) 
