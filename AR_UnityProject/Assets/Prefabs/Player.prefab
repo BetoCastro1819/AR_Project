@@ -474,6 +474,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
+  health: 100
+  pushbackSpeed: 20
+  pushbackTimer: 0.05
 --- !u!114 &114093393963918336
 MonoBehaviour:
   m_ObjectHideFlags: 1

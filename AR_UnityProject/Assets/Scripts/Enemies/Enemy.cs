@@ -5,12 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 	public float speed = 10f;
+	public int damage = 10;
 	public int health = 100;
 	public int pointsPerKill = 150;
 
 	private Rigidbody rb;
 
-	private void Start()
+	private void Awake()
 	{
 		GameManager.GetInstance().enemiesAlive++;
 	}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ZombieBehavior : Enemy
 {
+	public float pushPlayerForce = 100f;
+
 	private Player player;
 	private Rigidbody zombieRb;
 	private ZombieState state;
@@ -16,7 +18,7 @@ public class ZombieBehavior : Enemy
 		ATTACKING
 	}
 
-	void Awake () 
+	void Start() 
 	{
 		// TODO: Make EnemyManager class to just look for player ONCE, and not per enemy
 		player = FindObjectOfType<Player>();
@@ -35,7 +37,8 @@ public class ZombieBehavior : Enemy
 		if (health <= 0)
 			KillEnemy(this.gameObject);
 
-		ZombieFSM(state);
+		if (player != null)
+			ZombieFSM(state);
 	}
 
 	void ZombieFSM(ZombieState zombieState) 
@@ -63,6 +66,13 @@ public class ZombieBehavior : Enemy
 		transform.position += movement;
 
 		// Make transition to ATTACKING state, when pleayer is near
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		Player player = collision.gameObject.GetComponent<Player>();
+		if (player != null)
+			player.TakeDamage(damage);
 	}
 
 	void Attack() 

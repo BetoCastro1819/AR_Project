@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+	public GameObject gameOverScreen;
 	public int unlockedItems;
 	public int playerScore = 0;
 
-	[HideInInspector]
+	//[HideInInspector]
 	public int enemiesAlive = 0;
 
 	private int waveNumber;
 	private bool gameOver;
+	private Player player;
 
 	#region Singleton
 	private static GameManager instance;
@@ -31,7 +33,18 @@ public class GameManager : MonoBehaviour
 	{
 		gameOver = false;
 		unlockedItems = 1;
+		player = FindObjectOfType<Player>();
+	}
 
+	private void Update()
+	{
+		if (player == null)
+			if (gameOverScreen.activeSelf == false)
+			{
+				Debug.Log("GAME OVER");
+				gameOver = true;
+				gameOverScreen.SetActive(true);
+			}
 	}
 
 	public void SetWaveNumber(int num)

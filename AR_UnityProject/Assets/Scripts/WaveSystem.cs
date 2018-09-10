@@ -9,13 +9,15 @@ public class WaveSystem : MonoBehaviour
 	public float waveRate = 3f;
 	public float spawnRate = 1f;
 	public int numberOfEnemies = 5;
+	public int addEnemiesPerWave = 3;
 
-	private WaveState waveState;
+	public WaveState waveState;
+
 	private bool courutineStated;
 	private float timer;
 	private int waveNumber;
 
-	private enum WaveState
+	public enum WaveState
 	{
 		COUNTDOWN,
 		SPAWNING,
@@ -78,7 +80,6 @@ public class WaveSystem : MonoBehaviour
 
 			yield return new WaitForSeconds(spawnRate);
 		}
-
 		courutineStated = false;
 		waveState = WaveState.WAITING_FOR_PLAYER;
 	}
@@ -87,14 +88,10 @@ public class WaveSystem : MonoBehaviour
 	{
 		if (GameManager.GetInstance().enemiesAlive <= 0)
 		{
-			timer += Time.deltaTime;
-			if (timer > waveRate)
-			{
-				waveState = WaveState.SPAWNING;
-				timer = 0;
-				waveNumber++;
-				GameManager.GetInstance().SetWaveNumber(waveNumber);
-			}
+			waveState = WaveState.COUNTDOWN;
+			waveNumber++;
+			numberOfEnemies += addEnemiesPerWave;
+			GameManager.GetInstance().SetWaveNumber(waveNumber);
 		}
 	}
 }
