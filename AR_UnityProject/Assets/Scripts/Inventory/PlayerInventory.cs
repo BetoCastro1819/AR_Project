@@ -14,6 +14,9 @@ public class PlayerInventory : MonoBehaviour
 
 	void Start ()
 	{
+		for (int i = 0; i < playerItems.Count; i++)
+			playerItems[i].SetActive(false);
+
 		currentItemIndex = 0;
 		playerItems[currentItemIndex].SetActive(true);
 		gm = GameManager.GetInstance();

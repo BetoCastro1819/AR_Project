@@ -56,9 +56,6 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision obj)
     {
-        /*
-        if (obj.collider.tag == "Wall")
-            canMove = false;
-        */
+			
     }
 }

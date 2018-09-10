@@ -5,15 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public int unlockedItems;
-	public int enemiesPerSpawner = 5;
-	public float timeBetweenEnemiesSpawn = 1f;
+	public int playerScore = 0;
 
 	[HideInInspector]
 	public int enemiesAlive = 0;
 
 	private int waveNumber;
-	private bool startWave;
-	private bool waveComplete;
+	private bool gameOver;
 
 	#region Singleton
 	private static GameManager instance;
@@ -25,15 +23,24 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		unlockedItems = 1;
 	}
 
 	#endregion
 
 	private void Start()
 	{
-		waveNumber = 1;
-		startWave = true;
-		waveComplete = false;
+		gameOver = false;
+		unlockedItems = 1;
+
+	}
+
+	public void SetWaveNumber(int num)
+	{
+		waveNumber = num;
+	}
+
+	public void SetGameOver(bool setBool)
+	{
+		gameOver = setBool;
 	}
 }

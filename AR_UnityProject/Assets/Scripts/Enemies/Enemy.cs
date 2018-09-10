@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
 	public float speed = 10f;
 	public int health = 100;
+	public int pointsPerKill = 150;
 
 	private Rigidbody rb;
 
@@ -23,6 +24,7 @@ public class Enemy : MonoBehaviour
 	{
 		Destroy(enemy);
 		GameManager.GetInstance().enemiesAlive--;
+		GameManager.GetInstance().playerScore += pointsPerKill;
 	}
 
 	public void KnockbackEnemy(float strength) 
