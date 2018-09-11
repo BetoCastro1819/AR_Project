@@ -25,7 +25,11 @@ public class Enemy : MonoBehaviour
 
 	public void KillEnemy(GameObject enemy) 
 	{
-		Destroy(enemy);
+		Destroy(enemy, 2f);
+	}
+
+	private void OnDestroy() 
+	{
 		gm.enemiesAlive--;
 		gm.enemiesKilled++;
 		gm.SetPlayerScore(gm.GetPlayerScore() + pointsPerKill);

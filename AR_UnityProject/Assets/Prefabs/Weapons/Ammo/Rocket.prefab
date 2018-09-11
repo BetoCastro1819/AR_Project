@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23244914018755154}
   - component: {fileID: 65518389884344660}
   - component: {fileID: 54922814090513824}
+  - component: {fileID: 135227565969936550}
   m_Layer: 9
   m_Name: Rocket
   m_TagString: Untagged
@@ -124,8 +125,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a55bdc8e3c9ea546906ef51ea9f9fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketDamage: 0
+  rocketDamage: 120
   rocketSpeed: 50
   explosionForce: 1000
   explosionRadius: 3
-  upwardsModifier: 0
+  upwardsModifier: 1
+--- !u!135 &135227565969936550
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1823385068284192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 0}

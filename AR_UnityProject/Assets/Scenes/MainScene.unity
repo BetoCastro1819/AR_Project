@@ -1945,7 +1945,7 @@ MonoBehaviour:
   waveCountdownText: {fileID: 939673525}
   waveRate: 3
   spawnRate: 0.5
-  numberOfEnemies: 2
+  numberOfEnemies: 10
   addEnemiesPerWave: 2
   waveState: 0
 --- !u!4 &989935516

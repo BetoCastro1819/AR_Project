@@ -35,8 +35,26 @@ public class RocketBehavior : MonoBehaviour
 		if(enemy != null)
 		{
 			Rigidbody enemyRb = enemy.gameObject.GetComponent<Rigidbody>();
-			enemyRb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier);
-			enemy.TakeDamage(rocketDamage);
+			enemyRb.AddForce(-enemy.gameObject.transform.forward * explosionForce);
+			SphereCollider explosion = GetComponent<SphereCollider>();
+			explosion.enabled = true;
 		}
+
+		// make rocket explode with walls, and affect enemies/surroundings
+	}
+
+	private void OnTriggerEnter(Collider other) 
+	{
+		Enemy enemy = other.gameObject.GetComponent<Enemy>();
+		if(enemy != null)
+			CreateExplosion(enemy);		
+	}
+
+	private void CreateExplosion(Enemy enemy) 
+	{
+		Rigidbody enemyRb = enemy.gameObject.GetComponent<Rigidbody>();
+		enemyRb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier);
+		enemy.TakeDamage(rocketDamage);
+		Destroy(gameObject);
 	}
 }
