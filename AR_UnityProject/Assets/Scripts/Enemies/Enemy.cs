@@ -10,10 +10,12 @@ public class Enemy : MonoBehaviour
 	public int pointsPerKill = 150;
 
 	private Rigidbody rb;
+	private GameManager gm;
 
 	private void Awake()
 	{
-		GameManager.GetInstance().enemiesAlive++;
+		gm = GameManager.GetInstance();
+		gm.enemiesAlive++;
 	}
 
 	public void TakeDamage(int damage)
@@ -24,8 +26,9 @@ public class Enemy : MonoBehaviour
 	public void KillEnemy(GameObject enemy) 
 	{
 		Destroy(enemy);
-		GameManager.GetInstance().enemiesAlive--;
-		GameManager.GetInstance().playerScore += pointsPerKill;
+		gm.enemiesAlive--;
+		gm.enemiesKilled++;
+		gm.SetPlayerScore(gm.GetPlayerScore() + pointsPerKill);
 	}
 
 	public void KnockbackEnemy(float strength) 

@@ -34,4 +34,9 @@ public class UI_ButtonActions : MonoBehaviour
 	{
 		SceneManager.LoadScene("MenuScene");
 	}
+
+	public void Replay()
+	{
+		SceneManager.LoadScene("MainScene");
+	}
 }

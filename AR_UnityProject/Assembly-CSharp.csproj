@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\UI\UI_ButtonActions.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Player.cs" />
     <Compile Include="Assets\Scripts\WaveSystem.cs" />
     <None Include="Assets\Art\Fonts\robot_radicals\license.txt" />
     <Reference Include="UnityEditor.StandardEvents">

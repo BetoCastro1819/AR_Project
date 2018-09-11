@@ -6,14 +6,15 @@ public class GameManager : MonoBehaviour
 {
 	public GameObject gameOverScreen;
 	public int unlockedItems;
-	public int playerScore = 0;
 
 	//[HideInInspector]
 	public int enemiesAlive = 0;
+	public int enemiesKilled = 0;
 
-	private int waveNumber;
-	private bool gameOver;
 	private Player player;
+	private bool gameOver;
+	private int waveNumber;
+	private int playerScore;
 
 	#region Singleton
 	private static GameManager instance;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
+		player = FindObjectOfType<Player>();
 	}
 
 	#endregion
@@ -33,7 +35,7 @@ public class GameManager : MonoBehaviour
 	{
 		gameOver = false;
 		unlockedItems = 1;
-		player = FindObjectOfType<Player>();
+		playerScore = 0;
 	}
 
 	private void Update()
@@ -47,13 +49,12 @@ public class GameManager : MonoBehaviour
 			}
 	}
 
-	public void SetWaveNumber(int num)
-	{
-		waveNumber = num;
-	}
+	public void SetWaveNumber(int num) { waveNumber = num; }
+	public int GetWaveNumber() { return waveNumber; }
 
-	public void SetGameOver(bool setBool)
-	{
-		gameOver = setBool;
-	}
+	public void SetGameOver(bool setBool) { gameOver = setBool; }
+
+	public int GetPlayerScore() { return playerScore; }
+	public void SetPlayerScore(int score) { playerScore = score; }
+	public Player GetPlayer() { return player; }
 }
