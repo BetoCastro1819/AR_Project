@@ -43,7 +43,8 @@ public class ZombieBehavior : Enemy
 
 	void ZombieFSM(ZombieState zombieState) 
 	{
-		switch (zombieState) {
+		switch (zombieState) 
+        {
 			case ZombieState.IDLE:
 				if (playerFound) 
 					state = ZombieState.MOVING;

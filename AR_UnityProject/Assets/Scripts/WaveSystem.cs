@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveSystem : MonoBehaviour
 {
 	public GameObject enemyPrefab;
+    public GameObject waveCountdown;
 	public List<Transform> spawnPoints;
+    public Text waveCountdownText;
 	public float waveRate = 3f;
 	public float spawnRate = 1f;
 	public int numberOfEnemies = 5;
@@ -27,12 +30,13 @@ public class WaveSystem : MonoBehaviour
 	void Start()
 	{
 		waveNumber = 1;
-		timer = waveRate;
+		timer = 0;
 		waveState = WaveState.COUNTDOWN;
 		courutineStated = false;
-	}
+        waveCountdown.SetActive(false);
+    }
 
-	void Update()
+    void Update()
 	{
 		WaveFSM();
 	}
@@ -56,20 +60,23 @@ public class WaveSystem : MonoBehaviour
 
 	void WaveCountdown()
 	{
-		timer += Time.deltaTime;
-		if (timer > waveRate)
+		timer -= Time.deltaTime;
+		if (timer <= 1)
 		{
 			// Start spawning enemies
 			waveState = WaveState.SPAWNING;
 			timer = 0;
 		}
+        waveCountdown.SetActive(true);
+        waveCountdownText.text = timer.ToString("0");
 	}
 
 	IEnumerator WaveSpawning()
 	{
 		courutineStated = true;
+        waveCountdown.SetActive(false);
 
-		int spawnPointIndex = 0;
+        int spawnPointIndex = 0;
 		for (int i = 0; i < numberOfEnemies; i++)
 		{
 			Instantiate(enemyPrefab, spawnPoints[spawnPointIndex].transform.position, spawnPoints[spawnPointIndex].transform.rotation);
@@ -89,6 +96,7 @@ public class WaveSystem : MonoBehaviour
 		if (GameManager.GetInstance().enemiesAlive <= 0)
 		{
 			waveState = WaveState.COUNTDOWN;
+            timer = waveRate;
 			waveNumber++;
 			numberOfEnemies += addEnemiesPerWave;
 			GameManager.GetInstance().SetWaveNumber(waveNumber);

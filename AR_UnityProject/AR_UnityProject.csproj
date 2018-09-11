@@ -309,6 +309,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\ZombieBehavior.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -319,12 +320,17 @@
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Barriers\Barriers.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Explosives\Explosives.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Items\Guns\BulletBehavior.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Items\Guns\Guns.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Items\Weapons\BulletBehavior.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Items\Weapons\Guns.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Items\Weapons\RocketBehavior.cs" />
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_ButtonActions.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Player.cs" />
+    <Compile Include="Assets\Scripts\WaveSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Art\Fonts\robot_radicals\license.txt" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Light.uss" />
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Templates\Alert.uxml" />

@@ -138,8 +138,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmmo: 10
-  bulletPrefab: {fileID: 1437902261508968, guid: 2d7d21c312b97f243981a57c8f7649cf,
+  bulletPrefab: {fileID: 1823385068284192, guid: c6a0c2d9ad762944cbb842369d28df7f,
     type: 2}
-  weaponType: 0
+  weaponType: 3
   shootingPoint: {fileID: 4119138082199900}
   autoFire: 0
+  pointLeft: {fileID: 0}
+  pointRight: {fileID: 0}

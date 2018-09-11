@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 	private bool gameOver;
 	private int waveNumber;
 	private int playerScore;
-
+    
 	#region Singleton
 	private static GameManager instance;
 	public static GameManager GetInstance()
@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		gameOver = false;
-		unlockedItems = 1;
+		//unlockedItems = 1;
 		playerScore = 0;
 	}
 
@@ -49,12 +49,12 @@ public class GameManager : MonoBehaviour
 			}
 	}
 
-	public void SetWaveNumber(int num) { waveNumber = num; }
+    public void SetGameOver(bool setBool) { gameOver = setBool; }
+
+    public void SetWaveNumber(int num) { waveNumber = num; }
 	public int GetWaveNumber() { return waveNumber; }
 
-	public void SetGameOver(bool setBool) { gameOver = setBool; }
-
-	public int GetPlayerScore() { return playerScore; }
+    public int GetPlayerScore() { return playerScore; }
 	public void SetPlayerScore(int score) { playerScore = score; }
 	public Player GetPlayer() { return player; }
 }
