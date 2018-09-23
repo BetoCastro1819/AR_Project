@@ -15,7 +15,8 @@ public class ZombieBehavior : Enemy
 	{
 		IDLE,
 		MOVING,
-		ATTACKING
+		ATTACKING,
+		ON_EXPLOSION
 	}
 
 	void Start() 
@@ -34,8 +35,8 @@ public class ZombieBehavior : Enemy
 
 	void Update () 
 	{
-		if (health <= 0)
-			KillEnemy(this.gameObject);
+		if (health <= 0 || transform.position.y < -3)
+			KillEnemy(gameObject);
 
 		if (player != null)
 			ZombieFSM(state);
@@ -43,7 +44,8 @@ public class ZombieBehavior : Enemy
 
 	void ZombieFSM(ZombieState zombieState) 
 	{
-		switch (zombieState) {
+		switch (zombieState) 
+        {
 			case ZombieState.IDLE:
 				if (playerFound) 
 					state = ZombieState.MOVING;
@@ -73,6 +75,10 @@ public class ZombieBehavior : Enemy
 		Player player = collision.gameObject.GetComponent<Player>();
 		if (player != null)
 			player.TakeDamage(damage);
+
+		RocketBehavior rocket = collision.gameObject.GetComponent<RocketBehavior>();
+		if(rocket != null) 
+			TakeDamage(rocket.rocketDamage);
 	}
 
 	void Attack() 

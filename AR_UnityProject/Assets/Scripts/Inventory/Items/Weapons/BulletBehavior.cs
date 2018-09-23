@@ -24,7 +24,7 @@ public class BulletBehavior : MonoBehaviour
 	{
 		if (rb != null)
 		{
-			transform.position += this.transform.forward * bulletSpeed * Time.deltaTime;
+			transform.position += transform.forward * bulletSpeed * Time.deltaTime;
 		}
 	}
 
@@ -38,6 +38,6 @@ public class BulletBehavior : MonoBehaviour
 			enemy.TakeDamage(bulletDamage);
 		}
 
-		Destroy(this.gameObject);
+		Destroy(gameObject);
 	}
 }

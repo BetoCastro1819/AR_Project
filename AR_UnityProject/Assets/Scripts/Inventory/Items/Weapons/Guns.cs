@@ -9,7 +9,11 @@ public class Guns : Item
     public Transform shootingPoint;
     public bool autoFire = true;
 
-    public override void UseItem()
+	// For shotgun only
+	public Transform pointLeft;
+	public Transform pointRight;
+
+	public override void UseItem()
     {
         base.UseItem();
 
@@ -24,14 +28,14 @@ public class Guns : Item
             case Type_Of_Weapon.GUN:
 				Gun();
                 break;
-            case Type_Of_Weapon.UZI:
-                Debug.Log("Im an UZI");
+            case Type_Of_Weapon.SHOTGUN:
+				Shotgun();
                 break;
             case Type_Of_Weapon.ASSAULT_RIFLE:
                 Debug.Log("Im an ASSAULT RIFLE");
                 break;
             case Type_Of_Weapon.ROCKET_LAUNCHER:
-                Debug.Log("Im a ROCKET LAUNCHER");
+				RocketLauncher();
                 break;
         }
     }
@@ -39,42 +43,35 @@ public class Guns : Item
     public enum Type_Of_Weapon
     {
         GUN,
-        UZI,
+        SHOTGUN,
         ASSAULT_RIFLE,
         ROCKET_LAUNCHER
     }
 
     void Gun()
     {
-		if (autoFire)
-		{
+		if(autoFire)
 			Debug.Log("Im an AUTOMATIC-GUN");
-			RaycastShooting();
-
-		}
-		else
+		else 
 		{
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
+			if(Input.GetKeyDown(KeyCode.Space))
 				Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-				//RaycastShooting();
-			}
 		}
 	}
 
-	void RaycastShooting()
+	void Shotgun() 
 	{
-		//Debug.Log("Im a MANUAL-GUN");
-
-		RaycastHit hit;
-
-		if (Physics.Raycast(shootingPoint.position, shootingPoint.forward, out hit, 50f))
+		if(Input.GetKeyDown(KeyCode.Space)) 
 		{
-			if (hit.collider.tag == "Object")
-			{
-				Destroy(hit.collider.gameObject);
-				Debug.Log("I shot a " + hit.collider.name);
-			}
+			Instantiate(bulletPrefab, pointLeft.position, pointLeft.rotation);
+			Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+			Instantiate(bulletPrefab, pointRight.position, pointRight.rotation);
 		}
+	}
+
+	void RocketLauncher() 
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+			Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
 	}
 }
