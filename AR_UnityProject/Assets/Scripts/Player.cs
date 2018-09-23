@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+		/*
 		if (!beingAttacked)
 			Movement();
 		else
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
 
 		if (health < 0)
 			Destroy(gameObject);
+		*/
 	}
 
 	private void FixedUpdate()
