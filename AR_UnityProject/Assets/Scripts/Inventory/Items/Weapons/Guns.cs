@@ -54,8 +54,13 @@ public class Guns : Item
 			Debug.Log("Im an AUTOMATIC-GUN");
 		else 
 		{
-			if(Input.GetKeyDown(KeyCode.Space))
-				Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				GameObject bullet = ObjectsPool.Get().GetObjectPooled();
+				bullet.transform.position = shootingPoint.position;
+				bullet.transform.rotation = shootingPoint.rotation;
+				bullet.SetActive(true);
+			}
 		}
 	}
 

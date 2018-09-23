@@ -15,17 +15,22 @@ public class BulletBehavior : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 	}
 
-	void Update ()
+	private void Update()
 	{
 		BulletMovement();
 	}
 
-	void BulletMovement()
+	private void BulletMovement()
 	{
 		if (rb != null)
 		{
 			transform.position += transform.forward * bulletSpeed * Time.deltaTime;
 		}
+	}
+
+	private void DisableBullet()
+	{
+		gameObject.SetActive(false);
 	}
 
 	private void OnCollisionEnter(Collision obj)
@@ -38,6 +43,6 @@ public class BulletBehavior : MonoBehaviour
 			enemy.TakeDamage(bulletDamage);
 		}
 
-		Destroy(gameObject);
+		DisableBullet();
 	}
 }
