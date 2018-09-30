@@ -10,7 +10,10 @@ public class CameraMovement : MonoBehaviour
 
 	void Update ()
 	{
-		Vector3 camPos = new Vector3(playerPos.transform.position.x + offset.x, playerPos.transform.position.y + offset.y, playerPos.transform.position.z + offset.z);
-		transform.position = Vector3.Lerp(transform.position, camPos, lerpSpeed);
+		if (playerPos != null)
+		{
+			Vector3 camPos = new Vector3(playerPos.transform.position.x + offset.x, playerPos.transform.position.y + offset.y, playerPos.transform.position.z + offset.z);
+			transform.position = Vector3.Lerp(transform.position, camPos, lerpSpeed);
+		}
 	}
 }

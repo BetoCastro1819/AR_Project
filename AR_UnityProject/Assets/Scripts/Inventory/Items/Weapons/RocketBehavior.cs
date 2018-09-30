@@ -11,10 +11,13 @@ public class RocketBehavior : MonoBehaviour
 	public float upwardsModifier = 10f;
 
 	private Rigidbody rb;
+	private SphereCollider explosion;
 
 	private void Start() 
 	{
 		rb = GetComponent<Rigidbody>();
+		explosion = GetComponent<SphereCollider>();
+		explosion.radius = explosionRadius;
 	}
 
 	void Update() 
@@ -30,16 +33,14 @@ public class RocketBehavior : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision) 
 	{
-		Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+		explosion.enabled = true;
 
-		if(enemy != null)
+		Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+		if (enemy != null)
 		{
 			Rigidbody enemyRb = enemy.gameObject.GetComponent<Rigidbody>();
 			enemyRb.AddForce(-enemy.gameObject.transform.forward * explosionForce);
-			SphereCollider explosion = GetComponent<SphereCollider>();
-			explosion.enabled = true;
 		}
-
 		// make rocket explode with walls, and affect enemies/surroundings
 	}
 
@@ -47,14 +48,26 @@ public class RocketBehavior : MonoBehaviour
 	{
 		Enemy enemy = other.gameObject.GetComponent<Enemy>();
 		if(enemy != null)
-			CreateExplosion(enemy);		
+			DamageEnemiesWithExplosion(enemy);
+
+		Player player = other.GetComponent<Player>();
+		if (player != null)
+			player.TakeDamage(rocketDamage);
+
+		RecycleRocket();
 	}
 
-	private void CreateExplosion(Enemy enemy) 
+	private void DamageEnemiesWithExplosion(Enemy enemy) 
 	{
 		Rigidbody enemyRb = enemy.gameObject.GetComponent<Rigidbody>();
 		enemyRb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier);
 		enemy.TakeDamage(rocketDamage);
 		Destroy(gameObject);
+	}
+
+	private void RecycleRocket()
+	{
+		explosion.enabled = false;
+		gameObject.SetActive(false);
 	}
 }

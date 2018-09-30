@@ -726,7 +726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   damage: 10
-  health: 100
+  health: 10
   pointsPerKill: 150
   pushPlayerForce: 100
 --- !u!137 &137004125239510060

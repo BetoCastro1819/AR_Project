@@ -68,15 +68,32 @@ public class Guns : Item
 	{
 		if(Input.GetKeyDown(KeyCode.Space)) 
 		{
-			Instantiate(bulletPrefab, pointLeft.position, pointLeft.rotation);
-			Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
-			Instantiate(bulletPrefab, pointRight.position, pointRight.rotation);
+			GameObject bulletLeft = ObjectsPool.Get().GetObjectPooled();
+			bulletLeft.transform.position = pointLeft.position;
+			bulletLeft.transform.rotation = pointLeft.rotation;
+			bulletLeft.SetActive(true);
+
+			GameObject bulletMiddle = ObjectsPool.Get().GetObjectPooled();
+			bulletMiddle.transform.position = shootingPoint.position;
+			bulletMiddle.transform.rotation = shootingPoint.rotation;
+			bulletMiddle.SetActive(true);
+
+			GameObject bulletRight = ObjectsPool.Get().GetObjectPooled();
+			bulletRight.transform.position = pointRight.position;
+			bulletRight.transform.rotation = pointRight.rotation;
+			bulletRight.SetActive(true);
+
 		}
 	}
 
 	void RocketLauncher() 
 	{
-		if(Input.GetKeyDown(KeyCode.Space))
-			Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			GameObject rocket = ObjectsPool.Get().GetObjectPooled();
+			rocket.transform.position = shootingPoint.position;
+			rocket.transform.rotation = shootingPoint.rotation;
+			rocket.SetActive(true);
+		}
 	}
 }

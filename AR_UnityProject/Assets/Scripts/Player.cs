@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 		else
 			BeingAttacked();
 
-		if (health < 0)
+		if (health <= 0)
 			Destroy(gameObject);
 	}
 
