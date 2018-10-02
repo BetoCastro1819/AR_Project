@@ -318,6 +318,7 @@
     <Compile Include="Assets\Scripts\Input\InputManager.cs" />
     <Compile Include="Assets\Scripts\Input\InputPC.cs" />
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Items\Barriers\Barrier.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Barriers\Barriers.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Explosives\Explosives.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Weapons\BulletBehavior.cs" />

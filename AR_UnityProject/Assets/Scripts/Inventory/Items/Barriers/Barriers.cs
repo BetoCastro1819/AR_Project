@@ -33,7 +33,7 @@ public class Barriers : Item
 
             barrierPos.x = Mathf.RoundToInt(barrierPos.x);
             barrierPos.z = Mathf.RoundToInt(barrierPos.z);
-            barrierPos.y = 0.5f;
+            barrierPos.y = transform.localScale.y / 2;
 
             Instantiate(barrierPrefab, barrierPos, Quaternion.identity);
             currentAmmo--;
