@@ -4458,22 +4458,70 @@ MonoBehaviour:
   _tangents: []
   _sharedIndicesUV: []
   _colors:
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
+  - r: 1
+    g: 1
+    b: 1
+    a: 1
   userCollisions: 0
   isSelectable: 1
   unwrapParameters:
@@ -4508,7 +4556,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1ab720e4dee3e6342b3573e5932f72ad, type: 2}
+  - {fileID: 2100000, guid: 5156a9fc66bb6fa41bbea3f8434df9dd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
