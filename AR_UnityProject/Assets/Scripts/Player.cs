@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 	public float pushbackSpeed = 100f;
 	public float pushbackTimer = 0.2f;
 
+    [HideInInspector]
+    public bool canPlaceItem = true;
+
 	private Rigidbody rb;
 	private Vector3 movement;
 	private Vector3 lookAtDir;
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour
 	{
 		RaycastHit hit;
 
+        // Checks for movement collision
 		if (Physics.Raycast(transform.position, this.transform.forward, out hit, 0.5f))
 		{
 			if (hit.collider.tag == "Wall")
@@ -49,7 +53,13 @@ public class Player : MonoBehaviour
 		}
 		else
 			canMove = true;
-	}
+
+        // Check if can place object in front
+        if (Physics.Raycast(transform.position, this.transform.forward, out hit, 1.0f))
+            canPlaceItem = false;
+        else
+            canPlaceItem = true;
+    }
 
 	void Movement()
 	{

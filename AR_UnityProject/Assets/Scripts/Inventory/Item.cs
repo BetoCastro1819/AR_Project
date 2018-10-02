@@ -9,7 +9,7 @@ public class Item : MonoBehaviour
     [HideInInspector]
     public int currentAmmo;
 
-    private void Start()
+    public virtual void Start()
     {
         currentAmmo = maxAmmo;
     }

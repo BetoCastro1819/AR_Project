@@ -2,15 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barriers : MonoBehaviour {
+public class Barriers : Item
+{
+    public GameObject barrierPrefab;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private GameManager gm;
+    private Player player;
+
+    public override void Start()
+    {
+        base.Start();
+
+        gm = GameManager.GetInstance();
+        player = gm.GetPlayer();
+    }
+
+    public override void UseItem()
+    {
+        base.UseItem();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            PlaceBarrier();
+    }
+
+    private void PlaceBarrier()
+    {
+        if (player.canPlaceItem && currentAmmo > 0)
+        {
+            Vector3 barrierPos = player.transform.position + player.transform.forward;
+
+            barrierPos.x = Mathf.RoundToInt(barrierPos.x);
+            barrierPos.z = Mathf.RoundToInt(barrierPos.z);
+            barrierPos.y = 0.5f;
+
+            Instantiate(barrierPrefab, barrierPos, Quaternion.identity);
+            currentAmmo--;
+        }
+    }
 }
