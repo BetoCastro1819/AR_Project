@@ -10,9 +10,10 @@ public class PlayerInventory : MonoBehaviour
 	private const int nextItemIndex = 1;
 
 	private GameManager gm;
-	private int currentItemIndex;
+    private int currentItemIndex;
+    private int currentWaveNumber;
 
-	void Start ()
+    void Start ()
 	{
 		for (int i = 0; i < playerItems.Count; i++)
 			playerItems[i].SetActive(false);
@@ -20,7 +21,8 @@ public class PlayerInventory : MonoBehaviour
 		currentItemIndex = 0;
 		playerItems[currentItemIndex].SetActive(true);
 		gm = GameManager.GetInstance();
-	}
+        currentWaveNumber = gm.GetWaveNumber();
+    }
 	
 	void Update ()
 	{
@@ -28,7 +30,14 @@ public class PlayerInventory : MonoBehaviour
 			ChangeItem(nextItemIndex);
 		else if (Input.GetKeyDown(KeyCode.Z))
 			ChangeItem(previousItemIndex);
-	}
+
+        // Reloads all weapons every NEW WAVE
+        if (currentWaveNumber < gm.GetWaveNumber())
+        {
+            currentWaveNumber = gm.GetWaveNumber();
+            ReloadAmmo();
+        }
+    }
 
 	void ChangeItem(int nextOrPrevious)
 	{
@@ -51,4 +60,13 @@ public class PlayerInventory : MonoBehaviour
 			playerItems[currentItemIndex].SetActive(true);
 		}
 	}
+
+    void ReloadAmmo()
+    {
+        for (int i = 0; i < playerItems.Count; i++)
+        {
+            Item item = playerItems[i].GetComponent<Item>();
+            item.currentAmmo = item.maxAmmo;
+        }
+    }
 }

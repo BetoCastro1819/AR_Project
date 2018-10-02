@@ -62,7 +62,6 @@ public class RocketBehavior : MonoBehaviour
 		Rigidbody enemyRb = enemy.gameObject.GetComponent<Rigidbody>();
 		enemyRb.AddExplosionForce(explosionForce, transform.position, explosionRadius, upwardsModifier);
 		enemy.TakeDamage(rocketDamage);
-		Destroy(gameObject);
 	}
 
 	private void RecycleRocket()

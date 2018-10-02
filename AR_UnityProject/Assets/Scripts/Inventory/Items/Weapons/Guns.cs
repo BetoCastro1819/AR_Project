@@ -56,11 +56,15 @@ public class Guns : Item
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				GameObject bullet = ObjectsPool.Get().GetObjectPooled();
-				bullet.transform.position = shootingPoint.position;
-				bullet.transform.rotation = shootingPoint.rotation;
-				bullet.SetActive(true);
-			}
+                if (currentAmmo > 0)
+                {
+                    GameObject bullet = ObjectsPool.Get().GetObjectPooled();
+                    bullet.transform.position = shootingPoint.position;
+                    bullet.transform.rotation = shootingPoint.rotation;
+                    bullet.SetActive(true);
+
+                }
+            }
 		}
 	}
 
@@ -68,32 +72,48 @@ public class Guns : Item
 	{
 		if(Input.GetKeyDown(KeyCode.Space)) 
 		{
-			GameObject bulletLeft = ObjectsPool.Get().GetObjectPooled();
-			bulletLeft.transform.position = pointLeft.position;
-			bulletLeft.transform.rotation = pointLeft.rotation;
-			bulletLeft.SetActive(true);
+            if (currentAmmo > 0)
+            {
+                GameObject bulletLeft = ObjectsPool.Get().GetObjectPooled();
+                bulletLeft.transform.position = pointLeft.position;
+                bulletLeft.transform.rotation = pointLeft.rotation;
+                bulletLeft.SetActive(true);
+                currentAmmo--;
+            }
 
-			GameObject bulletMiddle = ObjectsPool.Get().GetObjectPooled();
-			bulletMiddle.transform.position = shootingPoint.position;
-			bulletMiddle.transform.rotation = shootingPoint.rotation;
-			bulletMiddle.SetActive(true);
 
-			GameObject bulletRight = ObjectsPool.Get().GetObjectPooled();
-			bulletRight.transform.position = pointRight.position;
-			bulletRight.transform.rotation = pointRight.rotation;
-			bulletRight.SetActive(true);
+            if (currentAmmo > 0)
+            {
+                GameObject bulletMiddle = ObjectsPool.Get().GetObjectPooled();
+                bulletMiddle.transform.position = shootingPoint.position;
+                bulletMiddle.transform.rotation = shootingPoint.rotation;
+                bulletMiddle.SetActive(true);
+                currentAmmo--;
+            }
 
-		}
-	}
+            if (currentAmmo > 0)
+            {
+                GameObject bulletRight = ObjectsPool.Get().GetObjectPooled();
+                bulletRight.transform.position = pointRight.position;
+                bulletRight.transform.rotation = pointRight.rotation;
+                bulletRight.SetActive(true);
+                currentAmmo--;
+            }
+        }
+    }
 
 	void RocketLauncher() 
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			GameObject rocket = ObjectsPool.Get().GetObjectPooled();
-			rocket.transform.position = shootingPoint.position;
-			rocket.transform.rotation = shootingPoint.rotation;
-			rocket.SetActive(true);
-		}
-	}
+            if (currentAmmo > 0)
+            {
+                GameObject rocket = ObjectsPool.Get().GetObjectPooled();
+                rocket.transform.position = shootingPoint.position;
+                rocket.transform.rotation = shootingPoint.rotation;
+                rocket.SetActive(true);
+                currentAmmo--;
+            }
+        }
+    }
 }

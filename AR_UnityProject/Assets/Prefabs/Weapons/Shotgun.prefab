@@ -11,6 +11,22 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1226540681452194}
   m_IsPrefabAsset: 1
+--- !u!1 &1011275575577722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4443618729440368}
+  - component: {fileID: 114896788411333696}
+  m_Layer: 0
+  m_Name: ShotgunAmmoPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1084532930160086
 GameObject:
   m_ObjectHideFlags: 1
@@ -162,6 +178,19 @@ Transform:
   m_Father: {fileID: 4837022061921108}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4443618729440368
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1011275575577722}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.281, y: -0.83100003, z: -1.811}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 4837022061921108}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4590861237710400
 Transform:
   m_ObjectHideFlags: 1
@@ -202,6 +231,7 @@ Transform:
   - {fileID: 4427892639821588}
   - {fileID: 4971019441530554}
   - {fileID: 4219950601320340}
+  - {fileID: 4443618729440368}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -317,7 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5561c3710b21e5409b1f10e0337fdd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 10
+  maxAmmo: 30
+  currentAmmo: 0
   bulletPrefab: {fileID: 1412453103332262, guid: 80c1648486083f643a7445f558228e3b,
     type: 2}
   weaponType: 1
@@ -325,3 +356,18 @@ MonoBehaviour:
   autoFire: 1
   pointLeft: {fileID: 4402073030707814}
   pointRight: {fileID: 4971019441530554}
+--- !u!114 &114896788411333696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1011275575577722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c01ed9ea85048446be65bf3f161f2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 1412453103332262, guid: 80c1648486083f643a7445f558228e3b,
+    type: 2}
+  poolParent: {fileID: 0}
+  poolSize: 20

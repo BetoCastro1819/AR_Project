@@ -6,7 +6,8 @@ public class Item : MonoBehaviour
 {
     public int maxAmmo = 10;
 
-    protected int currentAmmo;
+    [HideInInspector]
+    public int currentAmmo;
 
     private void Start()
     {
@@ -16,6 +17,17 @@ public class Item : MonoBehaviour
     private void Update()
     {
         UseItem();
+        UI_Player.Get().currenWeapon.text = "Weapon: " + gameObject.name;
+
+        if (gameObject.name == "Gun")
+            UI_Player.Get().ammo.text = "Ammo: Infinity";
+        else
+            UI_Player.Get().ammo.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
+
+        if (currentAmmo <= 0)
+            currentAmmo = 0;
+
+
     }
 
     public virtual void UseItem()

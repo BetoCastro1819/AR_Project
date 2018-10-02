@@ -155,11 +155,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1778578689850854, guid: 67a10b90327947346992cf4790ccc4b2, type: 2}
       propertyPath: m_Name
-      value: rocketlauncher
+      value: Rocket Launcher
       objectReference: {fileID: 0}
+    - target: {fileID: 114339447898129678, guid: 67a10b90327947346992cf4790ccc4b2,
+        type: 2}
+      propertyPath: poolParent
+      value: 
+      objectReference: {fileID: 1546884807}
     - target: {fileID: 1778578689850854, guid: 67a10b90327947346992cf4790ccc4b2, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67a10b90327947346992cf4790ccc4b2, type: 2}
@@ -762,7 +767,7 @@ RectTransform:
   - {fileID: 358826568}
   - {fileID: 939673524}
   m_Father: {fileID: 2056104345}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1510,6 +1515,8 @@ MonoBehaviour:
   score: {fileID: 372824150}
   waveNumber: {fileID: 357509694}
   enemiesKilled: {fileID: 2011192590}
+  currenWeapon: {fileID: 0}
+  ammo: {fileID: 0}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,6 +1609,77 @@ MonoBehaviour:
   playerPos: {fileID: 1297776572}
   offset: {x: 0, y: 16, z: -9.5}
   lerpSpeed: 0.05
+--- !u!1 &548189257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 548189258}
+  - component: {fileID: 548189260}
+  - component: {fileID: 548189259}
+  m_Layer: 5
+  m_Name: LowerPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &548189258
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548189257}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9999998, y: 0.9999998, z: 0.9999998}
+  m_Children:
+  - {fileID: 1598218692}
+  - {fileID: 1832925316}
+  m_Father: {fileID: 2056104345}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 20}
+  m_SizeDelta: {x: 800, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &548189259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548189257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &548189260
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548189257}
+  m_CullTransparentMesh: 0
 --- !u!1 &594106852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1730,53 +1808,6 @@ MonoBehaviour:
   pooledObject: {fileID: 1473361047381174, guid: 76944f790419dd0438b44d419fbf974f,
     type: 2}
   poolParent: {fileID: 1994791986}
-  poolSize: 20
---- !u!1 &688778041
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1837249149873274, guid: f21ab34767da724458277e46828b078e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 688778042}
-  - component: {fileID: 688778043}
-  m_Layer: 0
-  m_Name: RocketAmmoPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &688778042
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4339562361794222, guid: f21ab34767da724458277e46828b078e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 688778041}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.337, y: -0.84699994, z: -1.435}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
-  m_Children: []
-  m_Father: {fileID: 58876523}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &688778043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114663737079914532, guid: f21ab34767da724458277e46828b078e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 688778041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c01ed9ea85048446be65bf3f161f2ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObject: {fileID: 1395964549425904, guid: f667b02f8260c764f831d256a83b69e5,
-    type: 2}
-  poolParent: {fileID: 1546884807}
   poolSize: 20
 --- !u!1 &696233142
 GameObject:
@@ -2048,7 +2079,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 515785410}
-  unlockedItems: 3
+  inventory: {fileID: 1297776571}
+  unlockedItems: 1
+  wavesToUnlockNewItem: 3
   enemiesAlive: 0
   enemiesKilled: 0
 --- !u!4 &843274214
@@ -2353,7 +2386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &989935515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2376,7 +2409,7 @@ MonoBehaviour:
   waveCountdownText: {fileID: 939673525}
   waveRate: 3
   spawnRate: 0.5
-  numberOfEnemies: 10
+  numberOfEnemies: 5
   addEnemiesPerWave: 2
   waveState: 0
 --- !u!4 &989935516
@@ -3071,6 +3104,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114896788411333696, guid: ed7603e880b754144998961bacc9982d,
+        type: 2}
+      propertyPath: poolParent
+      value: 
+      objectReference: {fileID: 1262172142}
+    - target: {fileID: 1226540681452194, guid: ed7603e880b754144998961bacc9982d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed7603e880b754144998961bacc9982d, type: 2}
   m_IsPrefabAsset: 0
@@ -3115,7 +3157,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1743289667617222, guid: 84cdc61dc9cfe2d49bf5abfc275e9f5b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84cdc61dc9cfe2d49bf5abfc275e9f5b, type: 2}
@@ -3436,6 +3478,83 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1574279541}
   m_CullTransparentMesh: 0
+--- !u!1 &1598218691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1598218692}
+  - component: {fileID: 1598218694}
+  - component: {fileID: 1598218693}
+  m_Layer: 5
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1598218692
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1598218691}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 548189258}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1598218693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1598218691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 1832bbc7a6e4623418b3b0578e0046e4, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Weapon:
+
+'
+--- !u!222 &1598218694
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1598218691}
+  m_CullTransparentMesh: 0
 --- !u!1 &1673254046
 GameObject:
   m_ObjectHideFlags: 0
@@ -3551,53 +3670,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.19875029, y: -0.10246128, z: 0}
     m_Extent: {x: 0.30123082, y: 0.10370222, z: 0.099999994}
   m_DirtyAABB: 0
---- !u!1 &1701848279
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1837249149873274, guid: f21ab34767da724458277e46828b078e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1701848280}
-  - component: {fileID: 1701848281}
-  m_Layer: 0
-  m_Name: ShotgunAmmoPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1701848280
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4339562361794222, guid: f21ab34767da724458277e46828b078e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1701848279}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.281, y: -0.83100003, z: -1.811}
-  m_LocalScale: {x: 0.5, y: 1, z: 0.5}
-  m_Children: []
-  m_Father: {fileID: 891405618}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1701848281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114663737079914532, guid: f21ab34767da724458277e46828b078e,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1701848279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c01ed9ea85048446be65bf3f161f2ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObject: {fileID: 1412453103332262, guid: 80c1648486083f643a7445f558228e3b,
-    type: 2}
-  poolParent: {fileID: 1262172142}
-  poolSize: 20
 --- !u!1 &1710881961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3640,7 +3712,7 @@ GameObject:
   - component: {fileID: 1805021579}
   - component: {fileID: 1805021578}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: UpperPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3777,6 +3849,81 @@ RectTransform:
   m_AnchoredPosition: {x: -250, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1832925315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1832925316}
+  - component: {fileID: 1832925318}
+  - component: {fileID: 1832925317}
+  m_Layer: 5
+  m_Name: Ammo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1832925316
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1832925315}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 548189258}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 100, y: 0}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1832925317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1832925315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 1832bbc7a6e4623418b3b0578e0046e4, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Ammo:'
+--- !u!222 &1832925318
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1832925315}
+  m_CullTransparentMesh: 0
 --- !u!1 &1860292987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4600,6 +4747,8 @@ MonoBehaviour:
   score: {fileID: 963986270}
   waveNumber: {fileID: 1951997220}
   enemiesKilled: {fileID: 2107033418}
+  currenWeapon: {fileID: 1598218693}
+  ammo: {fileID: 1832925317}
 --- !u!224 &2056104345
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4611,6 +4760,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1805021577}
+  - {fileID: 548189258}
   - {fileID: 207819428}
   m_Father: {fileID: 0}
   m_RootOrder: 10

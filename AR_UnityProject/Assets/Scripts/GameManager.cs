@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public GameObject gameOverScreen;
-	public int unlockedItems;
+    public PlayerInventory inventory;
+	public int unlockedItems = 0;
+    public int wavesToUnlockNewItem = 3;
 
 	//[HideInInspector]
 	public int enemiesAlive = 0;
@@ -15,7 +17,8 @@ public class GameManager : MonoBehaviour
 	private bool gameOver;
 	private int waveNumber;
 	private int playerScore;
-    
+    private int waveToUnlockItem;
+
 	#region Singleton
 	private static GameManager instance;
 	public static GameManager GetInstance()
@@ -34,20 +37,29 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		gameOver = false;
-		//unlockedItems = 1;
 		playerScore = 0;
+        waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
 	}
 
 	private void Update()
 	{
-		if (player == null)
-			if (gameOverScreen.activeSelf == false)
-			{
-				Debug.Log("GAME OVER");
-				gameOver = true;
-				gameOverScreen.SetActive(true);
-			}
-	}
+        if (player == null)
+        {
+            if (gameOverScreen.activeSelf == false)
+            {
+                Debug.Log("GAME OVER");
+                gameOver = true;
+                gameOverScreen.SetActive(true);
+            }
+        }
+
+        if (waveNumber > waveToUnlockItem)
+        {
+            waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
+            if (unlockedItems < inventory.playerItems.Count - 1)
+                unlockedItems++;
+        }
+    }
 
     public void SetGameOver(bool setBool) { gameOver = setBool; }
 

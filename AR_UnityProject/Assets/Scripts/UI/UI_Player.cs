@@ -9,13 +9,29 @@ public class UI_Player : MonoBehaviour
 	public Text waveNumber;
 	public Text enemiesKilled;
 
+    public Text currenWeapon;
+    public Text ammo;
+
 	private GameManager gm;
 	private int currentScore;
 	private int currentHealth;
 	private int currentWave;
 	private int currentEnemiesKilled;
 
-	private void Start()
+    #region Singleton
+    private static UI_Player instance;
+    public static UI_Player Get()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
+
+    private void Start()
 	{
 		gm = GameManager.GetInstance();
 
