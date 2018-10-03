@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Guns : Item
 {
+	public ObjectsPool bulletsPool;
 	public GameObject bulletPrefab;
     public Type_Of_Weapon weaponType;
     public Transform shootingPoint;
@@ -58,7 +59,7 @@ public class Guns : Item
 			{
                 if (currentAmmo > 0)
                 {
-                    GameObject bullet = ObjectsPool.Get().GetObjectPooled();
+                    GameObject bullet = bulletsPool.GetObjectPooled();
                     bullet.transform.position = shootingPoint.position;
                     bullet.transform.rotation = shootingPoint.rotation;
                     bullet.SetActive(true);
@@ -74,7 +75,7 @@ public class Guns : Item
 		{
             if (currentAmmo > 0)
             {
-                GameObject bulletLeft = ObjectsPool.Get().GetObjectPooled();
+                GameObject bulletLeft = bulletsPool.GetObjectPooled();
                 bulletLeft.transform.position = pointLeft.position;
                 bulletLeft.transform.rotation = pointLeft.rotation;
                 bulletLeft.SetActive(true);
@@ -84,7 +85,7 @@ public class Guns : Item
 
             if (currentAmmo > 0)
             {
-                GameObject bulletMiddle = ObjectsPool.Get().GetObjectPooled();
+                GameObject bulletMiddle = bulletsPool.GetObjectPooled();
                 bulletMiddle.transform.position = shootingPoint.position;
                 bulletMiddle.transform.rotation = shootingPoint.rotation;
                 bulletMiddle.SetActive(true);
@@ -93,7 +94,7 @@ public class Guns : Item
 
             if (currentAmmo > 0)
             {
-                GameObject bulletRight = ObjectsPool.Get().GetObjectPooled();
+                GameObject bulletRight = bulletsPool.GetObjectPooled();
                 bulletRight.transform.position = pointRight.position;
                 bulletRight.transform.rotation = pointRight.rotation;
                 bulletRight.SetActive(true);
@@ -108,7 +109,7 @@ public class Guns : Item
 		{
             if (currentAmmo > 0)
             {
-                GameObject rocket = ObjectsPool.Get().GetObjectPooled();
+                GameObject rocket = bulletsPool.GetObjectPooled();
                 rocket.transform.position = shootingPoint.position;
                 rocket.transform.rotation = shootingPoint.rotation;
                 rocket.SetActive(true);

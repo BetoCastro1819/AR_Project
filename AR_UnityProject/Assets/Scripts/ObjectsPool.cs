@@ -10,6 +10,7 @@ public class ObjectsPool : MonoBehaviour
 
 	private List<GameObject> pool;
 
+	/*
 	#region Singleton
 	private static ObjectsPool instance;
 	public  static ObjectsPool Get()
@@ -22,6 +23,7 @@ public class ObjectsPool : MonoBehaviour
 		instance = this;
 	}
 	#endregion
+	*/
 
 	private void Start()
 	{
