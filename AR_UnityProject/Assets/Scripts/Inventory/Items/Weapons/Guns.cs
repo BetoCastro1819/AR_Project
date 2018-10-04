@@ -13,7 +13,6 @@ public class Guns : Item
 	// Effects
 	public ParticleSystem muzzleFlash;
 
-
 	// For shotgun only
 	public Transform pointLeft;
 	public Transform pointRight;
@@ -78,6 +77,8 @@ public class Guns : Item
 	{
 		if(Input.GetKeyDown(KeyCode.Space)) 
 		{
+			muzzleFlash.Play();
+
             if (currentAmmo > 0)
             {
                 GameObject bulletLeft = bulletsPool.GetObjectPooled();

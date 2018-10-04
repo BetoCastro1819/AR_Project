@@ -349,11 +349,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAmmo: 30
   currentAmmo: 0
+  weaponType: 1
+  bulletsPool: {fileID: 114896788411333696}
   bulletPrefab: {fileID: 1412453103332262, guid: 80c1648486083f643a7445f558228e3b,
     type: 2}
-  weaponType: 1
   shootingPoint: {fileID: 4427892639821588}
   autoFire: 1
+  muzzleFlash: {fileID: 198000012944515248, guid: 9defeac88977c0d448aa4541073ee9e4,
+    type: 2}
   pointLeft: {fileID: 4402073030707814}
   pointRight: {fileID: 4971019441530554}
 --- !u!114 &114896788411333696

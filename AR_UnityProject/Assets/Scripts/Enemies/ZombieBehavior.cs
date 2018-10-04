@@ -16,7 +16,7 @@ public class ZombieBehavior : Enemy
 		IDLE,
 		MOVING,
 		ATTACKING,
-		ON_EXPLOSION
+		DEAD
 	}
 
 	void Start() 
@@ -35,7 +35,7 @@ public class ZombieBehavior : Enemy
 
 	void Update () 
 	{
-		if (health <= 0 || transform.position.y < -3)
+		if (transform.position.y < -3)
 			KillEnemy(gameObject);
 
 		if (player != null)
@@ -57,6 +57,9 @@ public class ZombieBehavior : Enemy
 			case ZombieState.ATTACKING:
 				Attack();
 				break;
+			case ZombieState.DEAD:
+				KillZombie();
+				break;
 		}
 	}
 
@@ -67,7 +70,17 @@ public class ZombieBehavior : Enemy
 
 		transform.position += movement;
 
+		if (health <= 0)
+			state = ZombieState.DEAD;		
+
 		// Make transition to ATTACKING state, when pleayer is near
+	}
+
+	void KillZombie()
+	{
+		Rigidbody rb = GetComponent<Rigidbody>();
+		rb.constraints = RigidbodyConstraints.None;
+		Destroy(gameObject, 2f);
 	}
 
 	private void OnCollisionEnter(Collision collision)

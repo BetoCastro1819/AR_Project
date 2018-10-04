@@ -155,11 +155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a55bdc8e3c9ea546906ef51ea9f9fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trail: {fileID: 1972421176231196, guid: cda33f6a51fc277439ac616a85426997, type: 2}
+  explosionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 2}
   rocketDamage: 50
-  rocketSpeed: 30
-  explosionForce: 1000
-  explosionRadius: 4
-  upwardsModifier: 10
+  rocketSpeed: 40
+  explosionForce: 500
+  explosionRadius: 3
+  upwardsModifier: 20
 --- !u!135 &135029829109685168
 SphereCollider:
   m_ObjectHideFlags: 1

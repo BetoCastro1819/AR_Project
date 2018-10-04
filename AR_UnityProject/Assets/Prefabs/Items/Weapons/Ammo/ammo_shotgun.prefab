@@ -155,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee8f13bf00c18642bd3c73b6bed9856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodEffect: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc,
+    type: 2}
   bulletSpeed: 20
   knockbackStrength: 100
   bulletDamage: 5
