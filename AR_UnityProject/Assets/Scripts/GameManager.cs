@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public PlayerInventory inventory;
 	public int unlockedItems = 0;
     public int wavesToUnlockNewItem = 3;
+	public int extraAmmoEarnedPerWave = 3;
 
 	//[HideInInspector]
 	public int enemiesAlive = 0;

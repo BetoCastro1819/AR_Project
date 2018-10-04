@@ -2151,7 +2151,8 @@ MonoBehaviour:
   gameOverScreen: {fileID: 515785410}
   inventory: {fileID: 1297776571}
   unlockedItems: 1
-  wavesToUnlockNewItem: 3
+  wavesToUnlockNewItem: 1
+  extraAmmoEarnedPerWave: 3
   enemiesAlive: 0
   enemiesKilled: 0
 --- !u!4 &843274214
