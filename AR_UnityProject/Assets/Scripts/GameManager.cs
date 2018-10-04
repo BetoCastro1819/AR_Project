@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	public Text unlockedItemText;
+	public GameObject newItemScreen;
+
 	public GameObject gameOverScreen;
     public PlayerInventory inventory;
 	public int unlockedItems = 0;
@@ -39,6 +43,7 @@ public class GameManager : MonoBehaviour
 		gameOver = false;
 		playerScore = 0;
         waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
+		newItemScreen.SetActive(false);
 	}
 
 	private void Update()
@@ -53,12 +58,28 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (waveNumber > waveToUnlockItem)
+        if (waveNumber >= waveToUnlockItem)
         {
             waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
-            if (unlockedItems < inventory.playerItems.Count - 1)
-                unlockedItems++;
-        }
+			if (unlockedItems < inventory.playerItems.Count)
+			{
+				unlockedItemText.text = inventory.playerItems[unlockedItems].name;
+				newItemScreen.SetActive(true);
+				unlockedItems++;
+				Debug.Log("UNLOCKED: " + inventory.playerItems[unlockedItems - 1].name);
+			}
+		}
+
+		if (newItemScreen.activeSelf == true)
+		{
+			// Pause game until player presses ENTER
+			Time.timeScale = 0; 
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				newItemScreen.SetActive(false);
+				Time.timeScale = 1;
+			}
+		}
     }
 
     public void SetGameOver(bool setBool) { gameOver = setBool; }
