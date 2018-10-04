@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Guns : Item
 {
+    public Type_Of_Weapon weaponType;
 	public ObjectsPool bulletsPool;
 	public GameObject bulletPrefab;
-    public Type_Of_Weapon weaponType;
     public Transform shootingPoint;
     public bool autoFire = true;
+
+	// Effects
+	public ParticleSystem muzzleFlash;
+
 
 	// For shotgun only
 	public Transform pointLeft;
@@ -51,7 +55,7 @@ public class Guns : Item
 
     void Gun()
     {
-		if(autoFire)
+		if (autoFire)
 			Debug.Log("Im an AUTOMATIC-GUN");
 		else 
 		{
@@ -59,11 +63,12 @@ public class Guns : Item
 			{
                 if (currentAmmo > 0)
                 {
+					muzzleFlash.Play();
+
                     GameObject bullet = bulletsPool.GetObjectPooled();
                     bullet.transform.position = shootingPoint.position;
                     bullet.transform.rotation = shootingPoint.rotation;
                     bullet.SetActive(true);
-
                 }
             }
 		}

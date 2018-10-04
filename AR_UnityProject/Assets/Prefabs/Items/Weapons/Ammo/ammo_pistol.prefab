@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1473361047381174}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.874, z: 0.881}
+  m_LocalPosition: {x: -0, y: 0.874, z: 2.749}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4386667583108898}
@@ -227,6 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee8f13bf00c18642bd3c73b6bed9856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodEffect: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc,
+    type: 2}
   bulletSpeed: 20
   knockbackStrength: 100
   bulletDamage: 5
