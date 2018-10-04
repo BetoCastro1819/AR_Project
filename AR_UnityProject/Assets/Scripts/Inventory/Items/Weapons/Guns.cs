@@ -6,7 +6,6 @@ public class Guns : Item
 {
     public Type_Of_Weapon weaponType;
 	public ObjectsPool bulletsPool;
-	public GameObject bulletPrefab;
     public Transform shootingPoint;
     public bool autoFire = true;
 

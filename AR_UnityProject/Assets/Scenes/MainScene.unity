@@ -2042,7 +2042,7 @@ Transform:
   - {fileID: 594106853}
   - {fileID: 1909850669}
   m_Father: {fileID: 1297776572}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &843274212
 GameObject:
@@ -2073,7 +2073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 515785410}
   inventory: {fileID: 1297776571}
-  unlockedItems: 4
+  unlockedItems: 5
   wavesToUnlockNewItem: 3
   enemiesAlive: 0
   enemiesKilled: 0
@@ -2930,6 +2930,7 @@ MonoBehaviour:
   - {fileID: 891405616}
   - {fileID: 58876521}
   - {fileID: 395114386}
+  - {fileID: 2124145684}
 --- !u!4 &1297776572
 Transform:
   m_ObjectHideFlags: 0
@@ -2945,6 +2946,7 @@ Transform:
   - {fileID: 891405618}
   - {fileID: 58876523}
   - {fileID: 395114387}
+  - {fileID: 2124145686}
   - {fileID: 797457720}
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -4248,7 +4250,6 @@ GameObject:
   - component: {fileID: 1975771140}
   - component: {fileID: 1975771138}
   - component: {fileID: 1975771137}
-  - component: {fileID: 1975771136}
   - component: {fileID: 1975771135}
   m_Layer: 0
   m_Name: Floor
@@ -4271,17 +4272,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 1123330971}
---- !u!114 &1975771136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1975771134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 185759285, guid: 0472bdc8d6d15384d98f22ee34302f9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!33 &1975771137
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4629,6 +4619,52 @@ RectTransform:
   m_AnchoredPosition: {x: 75, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2124145684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124145686}
+  - component: {fileID: 2124145685}
+  m_Layer: 0
+  m_Name: Granades
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2124145685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2124145684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a989e8fb4494c8249b64cf9f184899d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAmmo: 10
+  currentAmmo: 0
+  granadePrefab: {fileID: 1363899824390126, guid: a8a0a3dce97fc844781f7bfe6fb21afd,
+    type: 2}
+  fowardForce: 300
+  upwardsForce: 300
+--- !u!4 &2124145686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2124145684}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.163, y: 1.191, z: 0.899}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1297776572}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2127751502
 GameObject:
   m_ObjectHideFlags: 0

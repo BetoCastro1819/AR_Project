@@ -79,7 +79,8 @@
     <Compile Include="Assets\Scripts\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Barriers\Barrier.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Barriers\Barriers.cs" />
-    <Compile Include="Assets\Scripts\Inventory\Items\Explosives\Explosives.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Items\Explosives\Granade.cs" />
+    <Compile Include="Assets\Scripts\Inventory\Items\Explosives\Granades.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Weapons\BulletBehavior.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Weapons\Guns.cs" />
     <Compile Include="Assets\Scripts\Inventory\Items\Weapons\RocketBehavior.cs" />
