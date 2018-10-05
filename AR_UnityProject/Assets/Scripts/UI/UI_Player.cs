@@ -63,6 +63,8 @@ public class UI_Player : MonoBehaviour
 
 	void Update ()
 	{
+		// Writes values on screen, only when they have changed
+
 		if (playerHealth != null)
 		{
 			if (currentHealth != gm.GetPlayer().health)

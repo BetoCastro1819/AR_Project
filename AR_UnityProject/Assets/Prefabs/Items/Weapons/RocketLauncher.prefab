@@ -304,16 +304,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5561c3710b21e5409b1f10e0337fdd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmmo: 5
+  maxAmmo: 0
   currentAmmo: 0
   weaponType: 3
   bulletsPool: {fileID: 114339447898129678}
-  bulletPrefab: {fileID: 1395964549425904, guid: f667b02f8260c764f831d256a83b69e5,
-    type: 2}
   shootingPoint: {fileID: 4164391339988156}
   autoFire: 0
   muzzleFlash: {fileID: 0}
-  rocketTrail: {fileID: 1000012600307132, guid: 20c0f7e297297fc468f9740f6bb08cb1,
-    type: 2}
   pointLeft: {fileID: 0}
   pointRight: {fileID: 0}
