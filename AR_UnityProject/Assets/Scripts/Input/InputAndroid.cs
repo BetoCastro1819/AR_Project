@@ -11,12 +11,14 @@ public class InputAndroid : IInput
 
 	public float HorizontalAxis() 
 	{
-		return Input.GetAxis("Horizontal");
-	}
+        return Input.GetAxis("Horizontal");
+        // Joystick.Horizontal;
+    }
 
 
-	public float VerticalAxis() 
+    public float VerticalAxis() 
 	{
-		return Input.GetAxis("Vertical");
+        return Input.GetAxis("Vertical");
+        // Joystick.Vertical;
 	}
 }

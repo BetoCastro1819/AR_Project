@@ -6,7 +6,6 @@ public class PlayerMobileController : MonoBehaviour
 {
 	public Joystick joystick;
 	public float speed;
-	public float joystickDeadzone = 0.2f;
 
 	private Rigidbody rb;
 
@@ -17,16 +16,18 @@ public class PlayerMobileController : MonoBehaviour
 	
 	void Update ()
 	{
-		if (joystick.Horizontal > joystickDeadzone ||
-			joystick.Horizontal < -joystickDeadzone ||
-			joystick.Vertical > joystickDeadzone ||
-			joystick.Vertical < -joystickDeadzone)
-		{
-			rb.velocity = new Vector3(joystick.Horizontal * speed,
-										rb.velocity.y,
-										joystick.Vertical * speed);
-		}
-		else
-			rb.velocity = Vector3.zero;
+        float x = joystick.Horizontal;
+        float y = joystick.Vertical;
+
+        Vector3 movement = new Vector3(x, 0, y);
+
+        rb.velocity = movement * speed;
+
+        if (x != 0 && y != 0)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x,
+                                                Mathf.Atan2(x, y) * Mathf.Rad2Deg,
+                                                transform.eulerAngles.z);
+        }
 	}
 }

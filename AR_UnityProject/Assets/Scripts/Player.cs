@@ -7,15 +7,13 @@ public class Player : MonoBehaviour
 	public float speed = 10f;
 	public int health = 100;
 
-	public float pushbackSpeed = 100f;
+	public float pushbackForce = 100f;
 	public float pushbackTimer = 0.2f;
 
     [HideInInspector]
     public bool canPlaceItem = true;
 
 	private Rigidbody rb;
-	private Vector3 movement;
-	private Vector3 lookAtDir;
 	private bool canMove = false;
 
 	private bool beingAttacked = false;
@@ -23,61 +21,53 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
-		movement = transform.position;
-		lookAtDir = transform.position;
-		canMove = true;
 		rb = GetComponent<Rigidbody>();
+		canMove = true;
 		timer = 0;
 	}
 
 	void Update()
 	{
-		if (!beingAttacked)
-			Movement();
-		else
-			BeingAttacked();
-
 		if (health <= 0)
 			Destroy(gameObject);
 	}
 
 	private void FixedUpdate()
 	{
-		RaycastHit hit;
+        // Player movement
+        if (!beingAttacked)
+            Movement();
+        else
+            BeingAttacked();
 
-        // Checks for movement collision
-		if (Physics.Raycast(transform.position, this.transform.forward, out hit, 0.5f))
-		{
-			if (hit.collider.tag == "Wall")
-				canMove = false;
-		}
-		else
-			canMove = true;
 
         // Check if can place object in front
+        RaycastHit hit;
         if (Physics.Raycast(transform.position, this.transform.forward, out hit, 1.0f))
+        {
             canPlaceItem = false;
+        }
         else
-            canPlaceItem = true;
+        {
+           canPlaceItem = true;
+        }
     }
 
 	void Movement()
 	{
-		float horizontal = InputManager.GetInstance().HorizontalAxis();     // Input.GetAxis("Horizontal");
-		float vertical = InputManager.GetInstance().VerticalAxis();         // Input.GetAxis("Vertical");
+		float x = InputManager.GetInstance().HorizontalAxis();       
+		float y = InputManager.GetInstance().VerticalAxis();         
 
-		// Rotation
-		lookAtDir.x = transform.position.x + horizontal;
-		lookAtDir.z = transform.position.z + vertical;
+        Vector3 movement = new Vector3(x, 0, y);
 
-		if (canMove)
-		{
-			movement.x += horizontal * speed * Time.deltaTime;
-			movement.z += vertical * speed * Time.deltaTime;
-		}
+        rb.velocity = movement * speed;
 
-		transform.LookAt(lookAtDir);
-		transform.position = movement;
+        if (x != 0 || y != 0)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x,
+                                                Mathf.Atan2(x, y) * Mathf.Rad2Deg,
+                                                transform.eulerAngles.z);
+        }
 	}
 
 	public void TakeDamage(int damage)
@@ -87,9 +77,7 @@ public class Player : MonoBehaviour
 
 	void BeingAttacked()
 	{
-
-		movement += -transform.forward * pushbackSpeed * Time.deltaTime;
-		transform.position = movement;
+        rb.AddForce(-transform.forward * pushbackForce);
 
 		timer += Time.deltaTime;
 		if (timer > pushbackTimer)
