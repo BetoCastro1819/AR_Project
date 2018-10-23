@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
 	public Vector3 offset;
     public float movementSpeed = 0.125f;
     public float rotationSpeed = 0.125f;
+    public float rotateAroundSpeed = 1.0f;
 
     private Vector3 smoothLookAtPoint;
 
@@ -18,22 +19,36 @@ public class CameraMovement : MonoBehaviour
 
     void Update ()
 	{
-		if (player != null)
-		{
-            Vector3 camPos = new Vector3(player.position.x + offset.x, player.position.y + offset.y, player.position.z + offset.z);
-
-            /*
-            // Creates a position for the camera based on player´s facing
-            Vector3 camPos =    player.transform.right * offset.x +         // X axis
-                                player.transform.forward * offset.z +       // Y axis
-                                player.transform.up * offset.y;             // Z axis
-            */
-
-
-            transform.position = Vector3.Lerp(transform.position, camPos, movementSpeed);
-
-            smoothLookAtPoint = Vector3.Lerp(smoothLookAtPoint, player.position, rotationSpeed);
-            transform.LookAt(smoothLookAtPoint);
-		}
+        if (player != null)
+        {
+            FollowPlayer();
+        }
 	}
+
+    void FollowPlayer()
+    {
+        Vector3 camPos = new Vector3(player.position.x + offset.x, player.position.y + offset.y, player.position.z + offset.z);
+
+        /*
+        if (Input.GetKey(KeyCode.Q))
+        {
+            camPos += transform.right;
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            transform.Translate(transform.right * -rotateAroundSpeed * Time.deltaTime);
+        }
+
+
+        // Creates a position for the camera based on player´s facing
+        Vector3 camPos =    player.transform.right * offset.x +         // X axis
+                            player.transform.forward * offset.z +       // Y axis
+                            player.transform.up * offset.y;             // Z axis
+        */
+
+        transform.position = Vector3.Lerp(transform.position, camPos, movementSpeed);
+
+        smoothLookAtPoint = Vector3.Lerp(smoothLookAtPoint, player.position, rotationSpeed);
+        transform.LookAt(smoothLookAtPoint);
+    }
 }
