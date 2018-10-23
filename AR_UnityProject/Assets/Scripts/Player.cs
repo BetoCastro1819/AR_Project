@@ -19,28 +19,34 @@ public class Player : MonoBehaviour
 	private bool beingAttacked = false;
 	private float timer;
 
+    private Camera cam;
+
 	private void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 		canMove = true;
 		timer = 0;
+        cam = Camera.main;
 	}
 
 	void Update()
 	{
 		if (health <= 0)
 			Destroy(gameObject);
-	}
+
+        Movement();
+        Aiming();
+    }
 
 	private void FixedUpdate()
 	{
         // Player movement
+        /*
         if (!beingAttacked)
             Movement();
         else
             BeingAttacked();
-
-
+        */
         // Check if can place object in front
         RaycastHit hit;
         if (Physics.Raycast(transform.position, this.transform.forward, out hit, 1.0f))
@@ -56,19 +62,44 @@ public class Player : MonoBehaviour
 	void Movement()
 	{
 		float x = InputManager.GetInstance().HorizontalAxis();       
-		float y = InputManager.GetInstance().VerticalAxis();         
+		float y = InputManager.GetInstance().VerticalAxis();
 
-        Vector3 movement = new Vector3(x, 0, y);
+        Vector3 movement = Vector3.forward * y + Vector3.right * x;
 
         rb.velocity = movement * speed;
 
+        /*
         if (x != 0 || y != 0)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x,
                                                 Mathf.Atan2(x, y) * Mathf.Rad2Deg,
                                                 transform.eulerAngles.z);
         }
+        */
 	}
+
+    void Aiming()
+    {
+        // Get cursor´s position in the world
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        // will be used to store cursor´s position in the world space
+        Vector3 worldMousePosition = new Vector3();
+
+        // Store cursor´s position in the world
+        // if it is proyecting a ray over an object in the world
+        if (Physics.Raycast(ray, out hit))
+        {
+            worldMousePosition = hit.point;
+            //Debug.Log(hit.collider.name);
+        }
+
+        Vector3 aimPos = worldMousePosition;
+        aimPos.y = transform.position.y;
+
+        transform.LookAt(aimPos);
+    }
 
 	public void TakeDamage(int damage)
 	{

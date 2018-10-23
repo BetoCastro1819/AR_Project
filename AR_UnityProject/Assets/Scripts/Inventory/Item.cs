@@ -17,12 +17,16 @@ public class Item : MonoBehaviour
     private void Update()
     {
         UseItem();
-        UI_Player.Get().currenWeapon.text = "Weapon: " + gameObject.name;
 
-        if (gameObject.name == "Gun")
-            UI_Player.Get().ammo.text = "Ammo: Infinity";
-        else
-            UI_Player.Get().ammo.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
+        if (UI_Player.Get() != null)
+        {
+            UI_Player.Get().currenWeapon.text = "Weapon: " + gameObject.name;
+
+            if (gameObject.name == "Gun")
+                UI_Player.Get().ammo.text = "Ammo: Infinity";
+            else
+                UI_Player.Get().ammo.text = "Ammo: " + currentAmmo + "/" + maxAmmo;
+        }
 
         if (currentAmmo <= 0)
             currentAmmo = 0;
