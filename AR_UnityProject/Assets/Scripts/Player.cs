@@ -34,21 +34,15 @@ public class Player : MonoBehaviour
 		if (health <= 0)
 			Destroy(gameObject);
 
-        Movement();
-        Aiming();
-    }
+	}
 
 	private void FixedUpdate()
 	{
-        // Player movement
-        /*
-        if (!beingAttacked)
-            Movement();
-        else
-            BeingAttacked();
-        */
-        // Check if can place object in front
-        RaycastHit hit;
+		Movement();
+		Aiming();
+
+		// Check if can place object in front
+		RaycastHit hit;
         if (Physics.Raycast(transform.position, this.transform.forward, out hit, 1.0f))
         {
             canPlaceItem = false;
@@ -61,21 +55,18 @@ public class Player : MonoBehaviour
 
 	void Movement()
 	{
+		/*
 		float x = InputManager.GetInstance().HorizontalAxis();       
 		float y = InputManager.GetInstance().VerticalAxis();
+		*/
 
-        Vector3 movement = Vector3.forward * y + Vector3.right * x;
+		float x = Input.GetAxis("Horizontal");
+		float z = Input.GetAxis("Vertical");
 
-        rb.velocity = movement * speed;
+		//Vector3 movement = Vector3.right * x + Vector3.down + Vector3.forward * z;
 
-        /*
-        if (x != 0 || y != 0)
-        {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x,
-                                                Mathf.Atan2(x, y) * Mathf.Rad2Deg,
-                                                transform.eulerAngles.z);
-        }
-        */
+		Vector3 movement = new Vector3(x, rb.velocity.y, z);
+		rb.velocity = movement.normalized * speed * Time.fixedDeltaTime;
 	}
 
     void Aiming()
