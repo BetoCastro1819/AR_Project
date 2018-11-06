@@ -9,25 +9,71 @@ public class Spaceship : MonoBehaviour
     public Transform shootingPointLeft;
     public Transform shootingPointRight;
 
+    // Ship controller
     public float fireRate = 0.2f;
     public float shootingForce = 50f;
     public float rotationSpeed = 20f;
-    public int health = 100;
+
+    // Energy
+    public int energyCostPerShot = 5;
+    public int valueForAutoRecharge = 1;
+    public float rechargeRate = 0.1f;
+    public float timeTostartRecharge = 0.5f;
+
+    public int maxEnergy = 100;
+    public int maxHealth = 100;
+
+    public int Health { get; set; }
+    public int Energy { get; set; }
 
     private Rigidbody rb;
-    private float timer;
+    private float fireRateTimer;
+    private float rechargeRateTimer;
+    private float startEnergyRechargeTimer;
+    private bool isShooting;
+
 	void Start ()
     {
+        // Get rigidbody for adding force when shooting
         rb = GetComponent<Rigidbody>();
-        timer = 0;
-	}
-	
-	void Update ()
+
+        // Initiaze timer at 0
+        startEnergyRechargeTimer = 0;
+        fireRateTimer = 0;
+        rechargeRateTimer = 0;
+
+        // Initialize bar´s values
+        Health = maxHealth;
+        Energy = maxEnergy;
+
+        isShooting = false;
+    }
+
+    void Update ()
     {
         Rotation();
-
         Shoot();
 
+        if (!isShooting && Energy < maxEnergy)
+        {
+            startEnergyRechargeTimer += Time.deltaTime;
+            if (startEnergyRechargeTimer > timeTostartRecharge)
+            {
+                AutomaticEnergyRecharge();
+            }
+        }
+
+        // Debug some stuff
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AddEnergy(20);
+            //AddHeath(20);
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            ConsumeEnergy(20);
+            //TakeDamage(20);
+        }
     }
 
     void Rotation()
@@ -52,33 +98,57 @@ public class Spaceship : MonoBehaviour
         {
             AutoFire();
         }
+        else
+        {
+            isShooting = false;
+        }
     }
 
     void ManualFire()
     {
-        rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
-
-        EnableBullet(shootingPointLeft);
-        EnableBullet(shootingPointRight);
-
-        //Instantiate(bulletPrefab, shootingPointLeft.position, shootingPointLeft.rotation);
-        //Instantiate(bulletPrefab, shootingPointRight.position, shootingPointRight.rotation);
-    }
-
-    void AutoFire()
-    {
-        timer += Time.deltaTime;
-        if (timer > fireRate)
+        if (Energy > 0)
         {
+            startEnergyRechargeTimer = 0;
+
+            isShooting = true;
+
             rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
             EnableBullet(shootingPointLeft);
             EnableBullet(shootingPointRight);
 
-            //Instantiate(bulletPrefab, shootingPointLeft.position, shootingPointLeft.rotation);
-            //Instantiate(bulletPrefab, shootingPointRight.position, shootingPointRight.rotation);
+            ConsumeEnergy(energyCostPerShot);
+        }
+        else
+        {
+            // TODO: tell the player he is out of energy
+        }
+    }
 
-            timer = 0;
+    void AutoFire()
+    {
+        if (Energy > 0)
+        {
+            startEnergyRechargeTimer = 0;
+
+            isShooting = true;
+
+            fireRateTimer += Time.deltaTime;
+            if (fireRateTimer > fireRate)
+            {
+                rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
+
+                EnableBullet(shootingPointLeft);
+                EnableBullet(shootingPointRight);
+
+                fireRateTimer = 0;
+
+                ConsumeEnergy(energyCostPerShot);
+            }
+        }
+        else
+        {
+            // TODO: tell the player he is out of energy
         }
     }
 
@@ -97,8 +167,104 @@ public class Spaceship : MonoBehaviour
     {
     }
 
+    //------------------------------ ENERGY BAR ------------------------------- //
+    private void AutomaticEnergyRecharge()
+    {
+        rechargeRateTimer += Time.deltaTime;
+        if (Energy < maxEnergy && 
+            rechargeRateTimer > rechargeRate)
+        {
+            Energy += valueForAutoRecharge;
+            rechargeRateTimer = 0;
+        }
+        else
+        {
+            startEnergyRechargeTimer = 0;
+        }
+    }
+
+    public void AddEnergy(int energyToAdd)
+    {
+        if (Energy + energyToAdd <= maxEnergy)
+        {
+            Energy += energyToAdd;
+        }
+        else
+        {
+            Energy = maxEnergy;
+        }
+        //Debug.Log("Energy: " + Energy);
+        //Debug.Log("Energy Bar: " + GetEnergyBarValue());
+    }
+
+    public void ConsumeEnergy(int energyConsumed)
+    {
+        if (Energy - energyConsumed >= 0)
+        {
+            Energy -= energyConsumed;
+        }
+        else
+        {
+            Energy = 0;
+        }
+        //Debug.Log("Energy: " + Energy);
+        //Debug.Log("Energy Bar: " + GetEnergyBarValue());
+    }
+
+    public float GetEnergyBarValue()
+    {
+        // maxEnergy = 100%
+        // currentEnergy = ?
+
+        float currentEnergyPercentage = (Energy * 100) / maxEnergy;
+
+        // Slider values goes from 0.0 to 1.0
+        // So we need de decimal version of the % obtained
+        return currentEnergyPercentage / 100;
+    }
+    //---------------------------------------------------------------------------- //
+
+
+
+    //------------------------------ PLAYER HEALTH ------------------------------- //
+    public void AddHeath(int healthToAdd)
+    {
+        if (Health + healthToAdd <= maxHealth)
+        {
+            Health += healthToAdd;
+        }
+        else
+        {
+            Health = maxHealth;
+        }
+        //Debug.Log("Health: " + Health);
+        //Debug.Log("Health Bar: " + GetHealthBarValue());
+    }
+
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        if (Health - damage >= 0)
+        {
+            Health -= damage;
+        }
+        else
+        {
+            Health = 0;
+        }
+        //Debug.Log("Health: " + Health);
+        //Debug.Log("Health Bar: " + GetHealthBarValue());
     }
+
+    public float GetHealthBarValue()
+    {
+        // maxHealth = 100%
+        // currentHealth = ?
+
+        float currentHealthPercentage = (Health * 100) / maxHealth;
+
+        // Slider values goes from 0.0 to 1.0
+        // So we need de decimal version of the % obtained
+        return currentHealthPercentage / 100;
+    }
+    //---------------------------------------------------------------------------- //
 }

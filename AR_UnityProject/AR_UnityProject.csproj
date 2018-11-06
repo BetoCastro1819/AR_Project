@@ -421,6 +421,7 @@
     <Compile Include="Assets\Scripts\Spaceship.cs" />
     <Compile Include="Assets\Scripts\UI\UI_ButtonActions.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Player.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_Spaceship.cs" />
     <Compile Include="Assets\Scripts\Vuforia\AutoFocusCamera.cs" />
     <Compile Include="Assets\Scripts\WaveSystem.cs" />
     <Compile Include="Assets\Virtual Joystick Pack\Scripts\Base\Joystick.cs" />
