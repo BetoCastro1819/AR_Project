@@ -4,34 +4,35 @@ using UnityEngine;
 
 public class Spaceship : MonoBehaviour
 {
+    public int maxHealth = 100;
+    public float rotationSpeed = 20f;
+
+    [Header("Shooting")]
     public GameObject bulletPrefab;
     public ObjectsPool objectsPool;
     public Transform shootingPointLeft;
     public Transform shootingPointRight;
-
-    // Ship controller
-    public float fireRate = 0.2f;
+    public float shotsPerSecond = 10;
     public float shootingForce = 50f;
-    public float rotationSpeed = 20f;
 
-    // Energy
+    private float fireRateTimer;
+    private bool isShooting;
+
+    [Header("Energy")]
+    public int maxEnergy = 100;
     public int energyCostPerShot = 5;
     public int valueForAutoRecharge = 1;
     public float rechargeRate = 0.1f;
     public float timeTostartRecharge = 0.5f;
 
-    public int maxEnergy = 100;
-    public int maxHealth = 100;
-
+    private float rechargeRateTimer;
+    private float startEnergyRechargeTimer;
+    
     public int Health { get; set; }
     public int Energy { get; set; }
 
     private Rigidbody rb;
-    private float fireRateTimer;
-    private float rechargeRateTimer;
-    private float startEnergyRechargeTimer;
-    private bool isShooting;
-
+    
 	void Start ()
     {
         // Get rigidbody for adding force when shooting
@@ -133,15 +134,17 @@ public class Spaceship : MonoBehaviour
 
             isShooting = true;
 
-            fireRateTimer += Time.deltaTime;
-            if (fireRateTimer > fireRate)
+            //fireRateTimer += Time.deltaTime;
+            if (Time.time >= fireRateTimer)
             {
+                fireRateTimer = Time.time + 1 / shotsPerSecond;
+
                 rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
                 EnableBullet(shootingPointLeft);
                 EnableBullet(shootingPointRight);
 
-                fireRateTimer = 0;
+                //fireRateTimer = 0;
 
                 ConsumeEnergy(energyCostPerShot);
             }
