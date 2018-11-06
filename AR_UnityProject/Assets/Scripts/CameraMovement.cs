@@ -46,9 +46,9 @@ public class CameraMovement : MonoBehaviour
                             player.transform.up * offset.y;             // Z axis
         */
 
-        transform.position = Vector3.Lerp(transform.position, camPos, movementSpeed);
+        transform.position = camPos;
 
-        smoothLookAtPoint = Vector3.Lerp(smoothLookAtPoint, player.position, rotationSpeed);
-        transform.LookAt(smoothLookAtPoint);
+        //smoothLookAtPoint = Vector3.Lerp(smoothLookAtPoint, player.position, rotationSpeed);
+        transform.LookAt(player.transform.position);
     }
 }
