@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\ZombieBehavior.cs" />
+    <Compile Include="Assets\Scripts\ForceField.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Input\IInput.cs" />
     <Compile Include="Assets\Scripts\Input\InputAndroid.cs" />
@@ -145,9 +146,9 @@
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\ObjectsPool.cs" />
     <Compile Include="Assets\Scripts\ParticleDestroyer.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\Spaceship.cs" />
     <Compile Include="Assets\Scripts\PlayerMobileController.cs" />
-    <Compile Include="Assets\Scripts\Spaceship.cs" />
     <Compile Include="Assets\Scripts\UI\UI_ButtonActions.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Player.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Spaceship.cs" />

@@ -5,12 +5,24 @@ using UnityEngine;
 public class ParticleDestroyer : MonoBehaviour
 {
 	private ParticleSystem particles;
-	private float timeToDestroy;
+	private float timeToDisableParticles;
+
+	private float timer;
 
 	void Start ()
 	{
 		particles = GetComponent<ParticleSystem>();
-		timeToDestroy = particles.main.duration;
-		Destroy(gameObject, timeToDestroy);
+		timeToDisableParticles = particles.main.startLifetimeMultiplier;
+		timer = 0;
+	}
+
+	private void Update()
+	{
+		timer += Time.deltaTime;
+		if (timer >= timeToDisableParticles)
+		{
+			gameObject.SetActive(false);
+			timer = 0;
+		}
 	}
 }
