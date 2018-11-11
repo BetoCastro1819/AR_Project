@@ -38,7 +38,6 @@ public class BulletBehavior : MonoBehaviour
 
 		if (enemy != null) 
 		{
-			enemy.KnockbackEnemy(knockbackStrength);
 			enemy.TakeDamage(bulletDamage);
 
 			float bloodYAngle = -transform.rotation.eulerAngles.y;

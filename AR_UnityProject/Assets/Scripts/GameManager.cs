@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	public Spaceship player;
+
 	public Text unlockedItemText;
 	public GameObject newItemScreen;
 
@@ -18,7 +20,6 @@ public class GameManager : MonoBehaviour
 	public int enemiesAlive = 0;
 	public int enemiesKilled = 0;
 
-	private Player player;
 	private bool gameOver;
 	private int waveNumber;
 	private int playerScore;
@@ -34,7 +35,6 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		instance = this;
-		player = FindObjectOfType<Player>();
 	}
 
 	#endregion
@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
 		gameOver = false;
 		playerScore = 0;
         waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
-		newItemScreen.SetActive(false);
 	}
 
 	private void Update()
@@ -59,6 +58,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
+		/*
         if (waveNumber >= waveToUnlockItem)
         {
             waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
 				Time.timeScale = 1;
 			}
 		}
+		*/
     }
 
     public void SetGameOver(bool setBool) { gameOver = setBool; }
@@ -90,5 +91,5 @@ public class GameManager : MonoBehaviour
 
     public int GetPlayerScore() { return playerScore; }
 	public void SetPlayerScore(int score) { playerScore = score; }
-	public Player GetPlayer() { return player; }
+	public Spaceship GetPlayer() { return player; }
 }

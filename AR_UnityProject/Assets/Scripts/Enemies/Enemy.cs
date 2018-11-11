@@ -4,45 +4,29 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public float speed = 10f;
-	public int damage = 10;
 	public int health = 100;
-	public int pointsPerKill = 150;
 
-	private Rigidbody rb;
-	private GameManager gm;
+	protected Rigidbody rb;
+	protected GameManager gm;
+	protected Spaceship player;
 
-	private void Awake()
+	public virtual void Start()
 	{
 		gm = GameManager.GetInstance();
-		gm.enemiesAlive++;
+		rb = GetComponent<Rigidbody>();
+		player = gm.GetPlayer();
+	}
+
+	private void Update()
+	{
+		if (health <= 0)
+		{
+			// Kill enemy
+		}
 	}
 
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
-	}
-
-	public void KillEnemy(GameObject enemy) 
-	{
-		Destroy(enemy);
-	}
-
-	private void OnDestroy() 
-	{
-		gm.enemiesAlive--;
-		gm.enemiesKilled++;
-		gm.SetPlayerScore(gm.GetPlayerScore() + pointsPerKill);
-	}
-
-	public void KnockbackEnemy(float strength) 
-	{
-		if (rb != null)
-			rb.AddForce(-this.transform.forward * strength);
-	}
-
-	public void SetRigidbody(Rigidbody rigidbody) 
-	{
-		rb = rigidbody;
 	}
 }

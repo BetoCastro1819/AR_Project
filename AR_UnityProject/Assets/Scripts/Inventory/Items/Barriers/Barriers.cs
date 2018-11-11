@@ -7,7 +7,7 @@ public class Barriers : Item
     public GameObject barrierPrefab;
 
     private GameManager gm;
-    private Player player;
+    private Spaceship player;
 
     public override void Start()
     {
@@ -27,6 +27,7 @@ public class Barriers : Item
 
     private void PlaceBarrier()
     {
+		/*
         if (player.canPlaceItem && currentAmmo > 0)
         {
             Vector3 barrierPos = player.transform.position + player.transform.forward;
@@ -38,5 +39,6 @@ public class Barriers : Item
             Instantiate(barrierPrefab, barrierPos, Quaternion.identity);
             currentAmmo--;
         }
+		*/
     }
 }

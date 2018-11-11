@@ -49,7 +49,7 @@ public class UI_Player : MonoBehaviour
 
 		if (playerHealth != null)
 		{
-			currentHealth = gm.GetPlayer().health;
+			currentHealth = gm.GetPlayer().Health;
 			playerHealth.text = "Health: " + currentHealth.ToString("0");
 		}
 
@@ -67,9 +67,9 @@ public class UI_Player : MonoBehaviour
 
 		if (playerHealth != null)
 		{
-			if (currentHealth != gm.GetPlayer().health)
+			if (currentHealth != gm.GetPlayer().Health)
 			{
-				currentHealth = gm.GetPlayer().health;
+				currentHealth = gm.GetPlayer().Health;
 				playerHealth.text = "Health: " + currentHealth.ToString("0");
 			}
 		}
