@@ -39,13 +39,22 @@ public class CloseRangeBomber : Enemy
 				PrepareForExplosion();
 			}
 		}
+
+		if (health <= 0)
+		{
+			Explosion();
+		}
 	}
 
 	void FollowPlayer()
 	{
 		Vector3 dir = player.transform.position - transform.position;
-
 		rb.velocity = dir.normalized * movementSpeed;
+
+		if (Vector3.Distance(transform.position, player.transform.position) <= stopAtDistance)
+		{
+			aboutToExplode = true;
+		}
 	}
 
 	void PrepareForExplosion()
@@ -63,13 +72,5 @@ public class CloseRangeBomber : Enemy
 	{
 		Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 		Destroy(gameObject);
-	}
-
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.tag == "Player")
-		{
-			aboutToExplode = true;
-		}
 	}
 }

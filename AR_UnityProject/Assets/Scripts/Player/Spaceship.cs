@@ -8,7 +8,6 @@ public class Spaceship : MonoBehaviour
     public float rotationSpeed = 20f;
 
     [Header("Shooting")]
-    public GameObject bulletPrefab;
     public ObjectsPool objectsPool;
     public Transform shootingPointLeft;
     public Transform shootingPointRight;
@@ -157,7 +156,7 @@ public class Spaceship : MonoBehaviour
 
     void EnableBullet(Transform _shootingPoint)
     {
-        GameObject bullet = objectsPool.GetObjectPooled();
+		GameObject bullet = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.PLAYER_BULLET); 
         if (bullet != null)
         {
             bullet.transform.position = _shootingPoint.position;
@@ -269,5 +268,10 @@ public class Spaceship : MonoBehaviour
         // So we need de decimal version of the % obtained
         return currentHealthPercentage / 100;
     }
-    //---------------------------------------------------------------------------- //
+	//---------------------------------------------------------------------------- //
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		//Debug.Log(collision.gameObject.name);
+	}
 }

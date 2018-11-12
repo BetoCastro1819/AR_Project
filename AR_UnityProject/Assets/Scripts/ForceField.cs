@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ForceField : MonoBehaviour
 {
-	public ObjectsPool poolOfSparks;
 	public int damagePlayer = 5;
 	public float damageRate = 0.5f;
 	public float pushPlayerForce = 1000f;
@@ -42,7 +41,7 @@ public class ForceField : MonoBehaviour
 
 			//GameObject sparks = Instantiate(sparksEffect, pointOfPlayerCollision, Quaternion.identity);
 
-			GameObject sparksEffect = poolOfSparks.GetObjectPooled();
+			GameObject sparksEffect = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);
 			sparksEffect.transform.position = pointOfPlayerCollision;
 			sparksEffect.transform.forward = dirToPushPlayer;
 			sparksEffect.SetActive(true);

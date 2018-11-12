@@ -214,8 +214,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.1, z: 0.19}
+  m_Center: {x: 0, y: 0, z: -0.03}
 --- !u!114 &114704676492563610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee8f13bf00c18642bd3c73b6bed9856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodEffect: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc,
+  sparkEffectPrefab: {fileID: 1508278438764550, guid: 677f861827951a54c8d49def825d9991,
     type: 2}
   bulletSpeed: 20
   knockbackStrength: 100

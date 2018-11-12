@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
-	public GameObject bloodEffect;
 	public float bulletSpeed = 10f;
 	public float knockbackStrength = 10f;
 	public int bulletDamage = 50;
@@ -39,15 +38,15 @@ public class BulletBehavior : MonoBehaviour
 		if (enemy != null) 
 		{
 			enemy.TakeDamage(bulletDamage);
-
-			float bloodYAngle = -transform.rotation.eulerAngles.y;
-			Quaternion dir = Quaternion.Euler(transform.rotation.eulerAngles.x, 
-											  bloodYAngle, 
-											  transform.rotation.eulerAngles.z
-											  );
-
-			Instantiate(bloodEffect, transform.position, dir);
 		}
+
+		GameObject sparks = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);
+		sparks.transform.position = obj.contacts[0].point;
+		
+		Vector3 sparksDir = obj.transform.position - obj.contacts[0].point;
+		sparks.transform.forward = sparksDir.normalized;
+
+		sparks.SetActive(true);
 
 		DisableBullet();
 	}
