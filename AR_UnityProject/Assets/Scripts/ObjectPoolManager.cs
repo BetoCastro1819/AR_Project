@@ -18,11 +18,13 @@ public class ObjectPoolManager : MonoBehaviour
 	#endregion
 
 	public ObjectsPool playerBulletsPool;
+	public ObjectsPool shootingEnemyBulletsPool;
 	public ObjectsPool sparksEffectPool;
 
 	public enum ObjectType
 	{
 		PLAYER_BULLET,
+		SHOOTING_ENEMY_BULLET,
 		SPARKS_EFFECT
 	}
 
@@ -36,8 +38,12 @@ public class ObjectPoolManager : MonoBehaviour
 				pooledObject = playerBulletsPool.GetObjectPooled();
 				break;
 			case ObjectType.SPARKS_EFFECT:
-				pooledObject =  sparksEffectPool.GetObjectPooled();
+				pooledObject = sparksEffectPool.GetObjectPooled();
 				break;
+			case ObjectType.SHOOTING_ENEMY_BULLET:
+				pooledObject = shootingEnemyBulletsPool.GetObjectPooled();
+				break;
+
 		}
 		return pooledObject;
 	}

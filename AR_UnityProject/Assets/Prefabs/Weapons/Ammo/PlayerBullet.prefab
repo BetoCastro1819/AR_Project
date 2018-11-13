@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 54498027758262388}
   - component: {fileID: 65505706969047104}
   m_Layer: 9
-  m_Name: ammo_pistol
+  m_Name: PlayerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,8 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee8f13bf00c18642bd3c73b6bed9856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sparkEffectPrefab: {fileID: 1508278438764550, guid: 677f861827951a54c8d49def825d9991,
-    type: 2}
   bulletSpeed: 20
   knockbackStrength: 100
   bulletDamage: 5

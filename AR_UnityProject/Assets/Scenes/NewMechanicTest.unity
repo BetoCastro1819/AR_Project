@@ -143,52 +143,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &84387971
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 7.63
-      objectReference: {fileID: 0}
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4860500872911744, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1040261206648170, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-      propertyPath: m_Name
-      value: ElectricalSparksEffect
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7e7e8b3bfea6ca54ab81ef15d2630240, type: 2}
-  m_IsPrefabAsset: 0
 --- !u!1 &129718090
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +155,7 @@ GameObject:
   - component: {fileID: 129718092}
   - component: {fileID: 129718091}
   m_Layer: 10
-  m_Name: Spaceship
+  m_Name: PlayerSpaceship
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,14 +200,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  rotationSpeed: 300
-  objectsPool: {fileID: 1172946083}
+  rotationSpeed: 500
   shootingPointLeft: {fileID: 1628970197}
   shootingPointRight: {fileID: 137132529}
   shotsPerSecond: 5
   shootingForce: 2000
   maxEnergy: 100
-  energyCostPerShot: 3
+  energyCostPerShot: 2
   valueForAutoRecharge: 1
   rechargeRate: 0.01
   timeTostartRecharge: 1
@@ -264,7 +217,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 129718090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: -5.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 642295293}
@@ -859,7 +812,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 1473361047381174, guid: 76944f790419dd0438b44d419fbf974f,
     type: 2}
-  poolParent: {fileID: 1172946082}
   poolSize: 30
 --- !u!1 &1364527406
 GameObject:
@@ -1099,7 +1051,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 1040261206648170, guid: 7e7e8b3bfea6ca54ab81ef15d2630240,
     type: 2}
-  poolParent: {fileID: 1549408135}
   poolSize: 50
 --- !u!1 &1628970196
 GameObject:
@@ -1305,6 +1256,34 @@ MonoBehaviour:
   player: {fileID: 129718093}
   playerHealth: {fileID: 305820824}
   playerEnergy: {fileID: 1364527408}
+--- !u!1 &1808718960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1808718961}
+  m_Layer: 0
+  m_Name: ShootingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1808718961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1808718960}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.12, z: 1.169}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2132108840}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1873066900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,6 +1403,49 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1885609793}
   m_CullTransparentMesh: 0
+--- !u!1 &1908534675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1908534676}
+  - component: {fileID: 1908534677}
+  m_Layer: 0
+  m_Name: ShootingEnemyBulletsPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1908534676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1908534675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1958539711}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1908534677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1908534675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c01ed9ea85048446be65bf3f161f2ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObject: {fileID: 1412453103332262, guid: 80c1648486083f643a7445f558228e3b,
+    type: 2}
+  poolSize: 20
 --- !u!1 &1916990578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1485,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh17032
+  m_Name: pb_Mesh17034
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1641,6 +1663,7 @@ Transform:
   m_Children:
   - {fileID: 1172946082}
   - {fileID: 1549408135}
+  - {fileID: 1908534676}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1656,6 +1679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBulletsPool: {fileID: 1172946083}
+  shootingEnemyBulletsPool: {fileID: 1908534677}
   sparksEffectPool: {fileID: 1549408136}
 --- !u!1 &2073339768
 GameObject:
@@ -5203,7 +5227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damagePlayer: 5
   damageRate: 0.5
-  pushPlayerForce: 200
+  pushPlayerForce: 100
 --- !u!1 &2132108839
 GameObject:
   m_ObjectHideFlags: 0
@@ -5233,6 +5257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 630416446}
+  - {fileID: 1808718961}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5275,9 +5300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  accelerationSpeed: 200
-  maxVelocity: 5
-  accelerateForSeconds: 1
-  idleForSeconds: 1
-  fireRate: 0
-  bulletDamage: 5
+  explosionEffect: {fileID: 1770158330086496, guid: b1e67204573de0c4b8cfcea477d57535,
+    type: 2}
+  lerpSpeed: 0.01
+  distToKeepFromPlayer: 5
+  shootingPoint: {fileID: 1808718960}
+  shotsPerSecond: 0.5

@@ -17,14 +17,6 @@ public class Enemy : MonoBehaviour
 		player = gm.GetPlayer();
 	}
 
-	private void Update()
-	{
-		if (health <= 0)
-		{
-			// Kill enemy
-		}
-	}
-
 	public void TakeDamage(int damage)
 	{
 		health -= damage;

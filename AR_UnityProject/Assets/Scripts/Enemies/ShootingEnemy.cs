@@ -2,68 +2,65 @@
 
 public class ShootingEnemy : Enemy
 {
+	public GameObject explosionEffect;
+
 	[Header("Movement")]
-	public float accelerationSpeed = 5f;
-	public float maxVelocity = 5f;
-	public float accelerateForSeconds = 3f;
-	public float idleForSeconds = 3f;
+	public float lerpSpeed = 5f;
+	public float distToKeepFromPlayer = 3f;
 
 	[Header("Shooting")]
-	public float fireRate = 0f;
-	public int bulletDamage = 5;
+	public GameObject shootingPoint;
+	public float shotsPerSecond = 0f;
 
-	private float accelerationTimer;
-	private float idleTimer;
+	private float fireRateTimer;
 
-	private bool timeToAccelerate;
-
-	public override void Start ()
+	public override void Start()
 	{
 		base.Start();
 
-		accelerationTimer = 0;
-		idleTimer = 0;
-		timeToAccelerate = true;
+		fireRateTimer = 0;
 	}
 
-	void Update()
+	private void Update()
+	{
+		if (health <= 0)
+		{
+			Instantiate(explosionEffect, transform.position, Quaternion.identity);
+			Destroy(gameObject);
+		}
+	}
+
+	void FixedUpdate()
 	{
 		if (player != null)
 		{
 			transform.LookAt(player.transform.position);
 
-			if (timeToAccelerate)
-			{
-				Accelerate();
-			}
-			else
-			{
-				Idle();
-			}
+			Movement();
+
+			Shoot();
 		}
 	}
 
-	void Accelerate()
+	void Movement()
 	{
-		Vector3 dir = player.transform.position - transform.position;
+		Vector3 targetPos = player.transform.position - player.transform.position.normalized * distToKeepFromPlayer;
+		targetPos.y = transform.position.y;
 
-		rb.AddForce(transform.forward * accelerationSpeed * Time.fixedDeltaTime);
-
-		accelerationTimer += Time.deltaTime;
-		if (accelerationTimer >= accelerateForSeconds)
-		{
-			timeToAccelerate = false;
-			accelerationTimer = 0;
-		}
+		transform.position = Vector3.Lerp(transform.position, targetPos, lerpSpeed);
 	}
 
-	void Idle()
+
+	void Shoot()
 	{
-		idleTimer += Time.deltaTime;
-		if (idleTimer >= idleForSeconds)
+		if (Time.time >= fireRateTimer)
 		{
-			timeToAccelerate = true;
-			idleTimer = 0;
+			fireRateTimer = Time.time + 1 / shotsPerSecond;
+
+			GameObject bullet = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SHOOTING_ENEMY_BULLET);
+			bullet.transform.position = shootingPoint.transform.position;
+			bullet.transform.rotation = shootingPoint.transform.rotation;
+			bullet.SetActive(true);
 		}
 	}
 }

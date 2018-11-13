@@ -8,7 +8,6 @@ public class Spaceship : MonoBehaviour
     public float rotationSpeed = 20f;
 
     [Header("Shooting")]
-    public ObjectsPool objectsPool;
     public Transform shootingPointLeft;
     public Transform shootingPointRight;
     public float shotsPerSecond = 10;

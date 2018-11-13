@@ -5,7 +5,6 @@ using UnityEngine;
 public class ObjectsPool : MonoBehaviour
 {
 	public GameObject pooledObject;
-	public Transform poolParent;
 	public int poolSize = 20;
 
 	private List<GameObject> pool;
@@ -32,7 +31,7 @@ public class ObjectsPool : MonoBehaviour
 		{
 			GameObject obj = (GameObject)Instantiate(pooledObject);
 			obj.SetActive(false);
-			obj.transform.parent = poolParent;
+			obj.transform.parent = gameObject.transform;
 			pool.Add(obj);
 		}
 	}
