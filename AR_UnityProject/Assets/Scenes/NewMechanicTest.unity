@@ -207,8 +207,8 @@ MonoBehaviour:
   shootingForce: 2000
   maxEnergy: 100
   energyCostPerShot: 2
-  valueForAutoRecharge: 1
-  rechargeRate: 0.01
+  valueForAutoRecharge: 5
+  rechargeRate: 0.02
   timeTostartRecharge: 1
 --- !u!4 &129718094
 Transform:
@@ -542,8 +542,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -7.4999695, y: 0}
+  m_SizeDelta: {x: -15, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &443122128
 MonoBehaviour:
@@ -846,8 +846,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -47.8}
-  m_SizeDelta: {x: 225.89, y: 26.03}
+  m_AnchoredPosition: {x: 7.57, y: -47.8}
+  m_SizeDelta: {x: 241.02, y: 26.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1364527408
 MonoBehaviour:
@@ -1366,8 +1366,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4.93, y: 0}
-  m_SizeDelta: {x: 19.86, y: 0}
+  m_AnchoredPosition: {x: -2.5, y: 0}
+  m_SizeDelta: {x: 5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1885609795
 MonoBehaviour:
@@ -5299,9 +5299,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e311247beb1e5294986c4b0261efbca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  rechargeEnergyParticles: {fileID: 1094205852064916, guid: 45c9b0ea0a2186c43a2d2ca17920cb37,
+    type: 2}
+  health: 10
   explosionEffect: {fileID: 1770158330086496, guid: b1e67204573de0c4b8cfcea477d57535,
     type: 2}
+  playerEnergyRecharge: 5
   lerpSpeed: 0.01
   distToKeepFromPlayer: 5
   shootingPoint: {fileID: 1808718960}

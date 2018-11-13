@@ -22,7 +22,7 @@ public class Spaceship : MonoBehaviour
     public int valueForAutoRecharge = 1;
     public float rechargeRate = 0.1f;
     public float timeTostartRecharge = 0.5f;
-
+	
     private float rechargeRateTimer;
     private float startEnergyRechargeTimer;
     
@@ -65,7 +65,7 @@ public class Spaceship : MonoBehaviour
         // Debug some stuff
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddEnergy(20);
+            RechargeEnergy(20);
             //AddHeath(20);
         }
         else if (Input.GetKeyDown(KeyCode.E))
@@ -184,7 +184,7 @@ public class Spaceship : MonoBehaviour
         }
     }
 
-    public void AddEnergy(int energyToAdd)
+    public void RechargeEnergy(int energyToAdd)
     {
         if (Energy + energyToAdd <= maxEnergy)
         {
