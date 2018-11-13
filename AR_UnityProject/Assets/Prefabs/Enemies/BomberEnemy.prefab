@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f7892a29bddd34ea93fbeb79448a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rechargeEnergyParticles: {fileID: 0}
   health: 30
   movementSpeed: 3
   stopAtDistance: 2

@@ -30,7 +30,6 @@ public class RechargeEnergyParticles : MonoBehaviour
 		timer += Time.unscaledDeltaTime;
 		if (timer > timeToGoToPosition)
 		{
-			//Debug.Log("sup");
 			ParticlesGoToPosition();
 		}
 	}
@@ -54,7 +53,7 @@ public class RechargeEnergyParticles : MonoBehaviour
 				player.RechargeEnergy(EnergyRechargeValue);
 				particles[i].remainingLifetime = 0;
 
-				Debug.Log(player.GetEnergyBarValue());
+				//Debug.Log(player.GetEnergyBarValue());
 			}
 		}
 

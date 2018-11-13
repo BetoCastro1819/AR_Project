@@ -9,6 +9,7 @@ public class BulletBehavior : MonoBehaviour
 	public int bulletDamage = 50;
 
 	private Rigidbody rb;
+    private Vector3 originPos;
 
 	private void Start()
 	{
@@ -42,12 +43,17 @@ public class BulletBehavior : MonoBehaviour
 
 		GameObject sparks = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);
 		sparks.transform.position = obj.contacts[0].point;
-		
-		Vector3 sparksDir = obj.transform.position - obj.contacts[0].point;
+
+        Vector3 sparksDir = originPos - obj.contacts[0].point;
 		sparks.transform.forward = sparksDir.normalized;
 
 		sparks.SetActive(true);
 
 		DisableBullet();
 	}
+
+    public void SetOriginPos(Vector3 _originPos)
+    {
+        originPos = _originPos;
+    }
 }

@@ -111,6 +111,7 @@ public class Spaceship : MonoBehaviour
 
             isShooting = true;
 
+            //rb.velocity = Vector3.zero;
             rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
             EnableBullet(shootingPointLeft);
@@ -135,8 +136,10 @@ public class Spaceship : MonoBehaviour
             //fireRateTimer += Time.deltaTime;
             if (Time.time >= fireRateTimer)
             {
+
                 fireRateTimer = Time.time + 1 / shotsPerSecond;
 
+                //rb.velocity = Vector3.zero;
                 rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
                 EnableBullet(shootingPointLeft);
@@ -158,6 +161,8 @@ public class Spaceship : MonoBehaviour
 		GameObject bullet = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.PLAYER_BULLET); 
         if (bullet != null)
         {
+            bullet.GetComponent<BulletBehavior>().SetOriginPos(transform.position);
+
             bullet.transform.position = _shootingPoint.position;
             bullet.transform.rotation = _shootingPoint.rotation;
             bullet.SetActive(true);
