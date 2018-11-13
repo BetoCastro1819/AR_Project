@@ -3,7 +3,6 @@
 public class ShootingEnemy : Enemy
 {
 	public GameObject explosionEffect;
-	public int playerEnergyRecharge = 5;
 
 	[Header("Movement")]
 	public float lerpSpeed = 5f;
@@ -70,16 +69,5 @@ public class ShootingEnemy : Enemy
 
 		// Ship explosion
 		Instantiate(explosionEffect, transform.position, Quaternion.identity);
-
-		// Particles from Enemy parent class
-		RechargeEnergyParticles rechargeParticles = energyParticles.GetComponent<RechargeEnergyParticles>();
-
-		if (rechargeParticles != null)
-		{
-			rechargeParticles.EnergyRechargeValue = playerEnergyRecharge;
-			Debug.Log("Recharge value: " + rechargeParticles.EnergyRechargeValue);
-		}
-
-		Destroy(gameObject);
 	}
 }

@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
 	public GameObject rechargeEnergyParticles;
 	public int health = 100;
+    public int playerEnergyRecharge = 10;
 
 	protected Rigidbody rb;
 	protected GameManager gm;
@@ -28,5 +29,16 @@ public class Enemy : MonoBehaviour
 	{
 		// Call from pool later on
 		energyParticles = Instantiate(rechargeEnergyParticles, transform.position, Quaternion.identity);
-	}
+
+        // Particles from Enemy parent class
+        RechargeEnergyParticles rechargeParticles = energyParticles.GetComponent<RechargeEnergyParticles>();
+
+        if (rechargeParticles != null)
+        {
+            rechargeParticles.EnergyRechargeValue = playerEnergyRecharge;
+            Debug.Log("Recharge value: " + rechargeParticles.EnergyRechargeValue);
+        }
+
+        Destroy(gameObject);
+    }
 }
