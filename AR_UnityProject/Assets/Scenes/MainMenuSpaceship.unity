@@ -390,7 +390,7 @@ MonoBehaviour:
   textureVisibility: 1
   distortionTex: {fileID: 2800000, guid: f6acd684980920849a180e1c541fb199, type: 3}
   distortionTile: {x: 0.06, y: 0.06}
-  waterHeight: 14.66
+  waterHeight: 5.52
   waterDeep: 0
   waterDepthParam: 0.071
   waterMinAlpha: 0.26
