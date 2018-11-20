@@ -6,6 +6,7 @@ public class ShakeTransform : MonoBehaviour
 {
     public class ShakeEvent
     {
+
         float duration;
         float timeRemaining;
 
