@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
+	public BulletType bulletType;
+	public enum BulletType 
+	{
+		PLAYER_BULLET,
+		ENEMY_BULLET
+	};
+
 	public float bulletSpeed = 10f;
 	public float knockbackStrength = 10f;
-	public int bulletDamage = 50;
+	public int playerBulletDamage = 50;
+	public int enemyBulletDamage = 10;
 
 	private Rigidbody rb;
     private Vector3 originPos;
@@ -34,11 +42,24 @@ public class BulletBehavior : MonoBehaviour
 
 	private void OnCollisionEnter(Collision obj)
 	{
-		Enemy enemy = obj.gameObject.GetComponent<Enemy>();
-
-		if (enemy != null) 
+		if (bulletType == BulletType.PLAYER_BULLET)
 		{
-			enemy.TakeDamage(bulletDamage);
+			Enemy enemy = obj.gameObject.GetComponent<Enemy>();
+
+			if (enemy != null)
+			{
+				enemy.TakeDamage(playerBulletDamage);
+			}
+		}
+
+		if (bulletType == BulletType.ENEMY_BULLET)
+		{
+			Spaceship player = obj.gameObject.GetComponent<Spaceship>();
+
+			if (player != null)
+			{
+				player.TakeDamage(enemyBulletDamage);
+			}
 		}
 
 		GameObject sparks = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);

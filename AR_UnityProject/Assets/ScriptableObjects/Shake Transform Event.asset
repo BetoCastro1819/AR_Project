@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: 0
   amplitude: 1
-  frequency: 5
-  duration: 0.5
+  frequency: 20
+  duration: 0.2
   blendOverLifeTime:
     serializedVersion: 2
     m_Curve:

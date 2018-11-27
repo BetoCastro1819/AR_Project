@@ -27,12 +27,15 @@ public class Barrier : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         BulletBehavior bullet = collision.gameObject.GetComponent<BulletBehavior>();
+
+		/*
         if (bullet)
             TakeDamage(bullet.bulletDamage);
 
         RocketBehavior rocket = collision.gameObject.GetComponent<RocketBehavior>();
         if (rocket)
             TakeDamage(rocket.rocketDamage);
+		*/
     }
 
     // Handles explosions

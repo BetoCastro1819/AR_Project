@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spaceship : MonoBehaviour
 {
+	public GameObject explosionEffect;
     public int maxHealth = 100;
     public float rotationSpeed = 20f;
 
@@ -25,6 +26,8 @@ public class Spaceship : MonoBehaviour
 	
     private float rechargeRateTimer;
     private float startEnergyRechargeTimer;
+
+	private bool shootingButtonPressed;
     
     public int Health { get; set; }
     public int Energy { get; set; }
@@ -46,7 +49,9 @@ public class Spaceship : MonoBehaviour
         Energy = maxEnergy;
 
         isShooting = false;
-    }
+
+		shootingButtonPressed = false;
+	}
 
     void Update ()
     {
@@ -73,6 +78,11 @@ public class Spaceship : MonoBehaviour
             ConsumeEnergy(20);
             //TakeDamage(20);
         }
+
+		if (Health <= 0)
+		{
+			KillPlayer();
+		}
     }
 
     void Rotation()
@@ -89,11 +99,13 @@ public class Spaceship : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+
+
+        if (Input.GetKeyDown(KeyCode.Space) || shootingButtonPressed)
         {
             ManualFire();
         }
-        else if (Input.GetKey(KeyCode.Space))
+        else if (Input.GetKey(KeyCode.Space) || shootingButtonPressed)
         {
             AutoFire();
         }
@@ -159,8 +171,9 @@ public class Spaceship : MonoBehaviour
     void EnableBullet(Transform _shootingPoint)
     {
 		GameObject bullet = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.PLAYER_BULLET); 
-        if (bullet != null)
+        if (bullet.activeInHierarchy == false)
         {
+			// Sets the origin to know whick direction to spawn the particles when colliding
             bullet.GetComponent<BulletBehavior>().SetOriginPos(transform.position);
 
             bullet.transform.position = _shootingPoint.position;
@@ -171,7 +184,9 @@ public class Spaceship : MonoBehaviour
 
     void KillPlayer()
     {
-    }
+		Instantiate(explosionEffect, transform.position, Quaternion.identity);
+		Destroy(gameObject);
+	}
 
     //------------------------------ ENERGY BAR ------------------------------- //
     private void AutomaticEnergyRecharge()
@@ -257,6 +272,9 @@ public class Spaceship : MonoBehaviour
         {
             Health = 0;
         }
+
+		CameraShake.GetInstance().Shake();
+
         //Debug.Log("Health: " + Health);
         //Debug.Log("Health Bar: " + GetHealthBarValue());
     }
@@ -278,4 +296,23 @@ public class Spaceship : MonoBehaviour
 	{
 		//Debug.Log(collision.gameObject.name);
 	}
+
+
+	/*------------ MOBILE INPUT -------------*/
+
+	public void LeftArrowButton()
+	{
+		transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
+	}
+
+	public void RightArrowButton()
+	{
+		transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
+	}
+
+	public void ShootButton()
+	{
+		shootingButtonPressed = true;
+	}
+
 }

@@ -30,7 +30,10 @@ public class RechargeEnergyParticles : MonoBehaviour
 		timer += Time.unscaledDeltaTime;
 		if (timer > timeToGoToPosition)
 		{
-			ParticlesGoToPosition();
+			if (player != null)
+			{
+				ParticlesGoToPosition();
+			}
 		}
 	}
 
