@@ -4,82 +4,170 @@ using UnityEngine;
 
 public class LaserEnemy : MonoBehaviour
 {
-    public float timeToShootLaser = 3f;
-    public float laserDuration = 5;
+	public float rotationSpeed = 30f;
+
+	[Header("Warning State")]
+	public float timeToStartWarning = 3f;
+	public float warningDuration = 2f;
+	public float laserWarningWidth = 0.2f;
+
+	[Header("Shooting State")]
+	public float laserShootingWidth = 1f;
+	public float shootingLaserDuration = 5;
 	public int laserDamage = 5;
 
-    private LineRenderer laser;
+	private GameObject sparks;
+	private LineRenderer laser;
+	private Animator animator;
 
-    private float shootLaserTimer;
-    private float shootingDurationTimer;
+	private float shootLaserTimer;
+	private float shootingDurationTimer;
 
-    GameObject sparks;
 
-	void Start ()
+	private float timer = 0;
+
+	private LaserState laserState;
+	private enum LaserState
+	{
+		SPAWN,
+		WARNING,
+		SHOOTING_LASER,
+		LEAVE
+	}
+
+
+	void Start()
+	{
+		laser = GetComponent<LineRenderer>();
+		animator = GetComponent<Animator>();
+
+		timer = 0;
+
+		shootLaserTimer = 0;
+		shootingDurationTimer = 0;
+
+		laserState = LaserState.SPAWN;
+	}
+
+	void Update()
+	{
+		transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
+
+		UpdateLaserState();
+	}
+
+
+	void UpdateLaserState()
+	{
+		switch (laserState)
+		{
+			case LaserState.SPAWN:
+				// Play spawning animation on Awake
+				SpawnState();
+				break;
+			case LaserState.WARNING:
+				WarningState();
+				break;
+			case LaserState.SHOOTING_LASER:
+				ShootingLaserState();
+				break;
+			case LaserState.LEAVE:
+				LeaveState();
+				break;
+		}
+	}
+
+	void SpawnState()
+	{
+		laser.SetPosition(1, transform.position);
+
+		timer += Time.deltaTime;
+		if (timer >= timeToStartWarning)
+		{
+			laserState = LaserState.WARNING;
+			timer = 0;
+		}
+	}
+
+	void WarningState()
+	{
+		// Activate warning laser
+		// thin laser that doesn't cause damage to the player
+
+		ShootLaserBeam(false, laserWarningWidth);
+
+		timer += Time.deltaTime;
+		if (timer >= warningDuration)
+		{
+			laserState = LaserState.SHOOTING_LASER;
+			timer = 0;
+		}
+	}
+
+	void ShootingLaserState()
+	{
+		ShootLaserBeam(true, laserShootingWidth);
+
+		timer += Time.deltaTime;
+		if (timer >= shootingLaserDuration)
+		{
+			laserState = LaserState.LEAVE;
+
+			timer = 0;
+		}
+	}
+
+	void LeaveState()
+	{
+		laser.SetPosition(1, transform.position);
+
+		animator.SetTrigger("TimeToLeave");
+	}
+
+	void ShootLaserBeam(bool causeDamage, float laserWidth)
     {
-        laser = GetComponent<LineRenderer>();
+		laser.startWidth	= laserWidth;
+		laser.endWidth		= laserWidth;
 
-        shootLaserTimer = 0;
-        shootingDurationTimer = 0;
-    }
-
-    void Update ()
-    {
-        shootLaserTimer += Time.deltaTime;
-        if (shootLaserTimer >= timeToShootLaser)
-        {
-            HandleLaserDuration();
-        }
-
-        transform.Rotate(new Vector3(0, 30 * Time.deltaTime, 0));
-    }
-
-    void HandleLaserDuration()
-    {
-        ShootLaserBeam();
-
-        shootingDurationTimer += Time.deltaTime;
-        if (shootingDurationTimer >= laserDuration)
-        {
-            shootLaserTimer = 0;
-            shootingDurationTimer = 0;
-            laser.SetPosition(1, transform.position);
-        }
-
-    }
-
-    void ShootLaserBeam()
-    {
         laser.SetPosition(0, transform.position);
-        RaycastHit hit;
+
+		RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
             if (hit.collider)
             {
                 laser.SetPosition(1, hit.point);
 
-                if (sparks == null)
-                {
-                    sparks = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);
-                }
+				if (causeDamage == true)
+				{
+					if (sparks == null)
+					{
+						sparks = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);
+					}
 
-                if (sparks.activeInHierarchy == false)
-                {
-                    sparks.SetActive(true);
-                }
+					if (sparks.activeInHierarchy == false)
+					{
+						sparks.SetActive(true);
+					}
 
-                sparks.transform.position = hit.point;
+					sparks.transform.position = hit.point;
 
-                Vector3 sparksDir = transform.position - hit.point;
-                sparks.transform.forward = sparksDir.normalized;
+					Vector3 sparksDir = transform.position - hit.point;
+					sparks.transform.forward = sparksDir.normalized;
 
-                if (hit.collider.tag == "Player")
-                {
-                    Spaceship player = hit.collider.GetComponent<Spaceship>();
+					if (hit.collider.tag == "Player")
+					{
+						Spaceship player = hit.collider.GetComponent<Spaceship>();
 
-                    player.TakeDamage(laserDamage);
-                }
-            }
-        }
+						player.TakeDamage(laserDamage);
+					}
+				}
+			}
+		}
     }
+
+	public void DisableGameObject()
+	{
+		gameObject.SetActive(false);
+	}
 }

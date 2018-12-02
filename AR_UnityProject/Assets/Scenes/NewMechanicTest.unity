@@ -6609,7 +6609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &757381994
 Transform:
   m_ObjectHideFlags: 0
@@ -6639,6 +6639,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listOfEnemies:
+  - {fileID: 1216404863330776, guid: d962279304dc3894287a87e3fa216a63, type: 2}
+  - {fileID: 1216404863330776, guid: d962279304dc3894287a87e3fa216a63, type: 2}
+  - {fileID: 1216404863330776, guid: d962279304dc3894287a87e3fa216a63, type: 2}
+  - {fileID: 1216404863330776, guid: d962279304dc3894287a87e3fa216a63, type: 2}
   - {fileID: 1216404863330776, guid: d962279304dc3894287a87e3fa216a63, type: 2}
   - {fileID: 1121738371819154, guid: bf09de4e07a975240a89d5447c69bfef, type: 2}
   spawnPoints:
@@ -6901,6 +6905,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.863541, y: 4.570224, z: 7.502928}
   m_Center: {x: 5.02304, y: 2.285112, z: 5.168764}
+--- !u!1 &887913767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1872526947410174, guid: a96220518b1ad7548b365e3e27e85398,
+    type: 2}
+  m_PrefabInternal: {fileID: 2073587201}
+--- !u!95 &887913768
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 887913767}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56b1a1a947eb59949b2bf575e6743cef, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &910002046
 Prefab:
   m_ObjectHideFlags: 0
@@ -9387,7 +9414,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4022674325083998, guid: a96220518b1ad7548b365e3e27e85398, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4022674325083998, guid: a96220518b1ad7548b365e3e27e85398, type: 2}
       propertyPath: m_LocalPosition.z
@@ -9413,9 +9440,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 1872526947410174, guid: a96220518b1ad7548b365e3e27e85398, type: 2}
-      propertyPath: m_Name
-      value: LaserEnemy
+    - target: {fileID: 4624004913897628, guid: a96220518b1ad7548b365e3e27e85398, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1872526947410174, guid: a96220518b1ad7548b365e3e27e85398, type: 2}
       propertyPath: m_IsActive
