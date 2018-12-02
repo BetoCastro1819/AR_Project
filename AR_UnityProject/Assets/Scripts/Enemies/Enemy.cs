@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public GameObject rechargeEnergyParticles;
+	public List<GameObject> rechargeParticleList;
 	public int health = 100;
-    public int playerEnergyRecharge = 10;
+    public int onKillParticlesRecharge = 10;
 
 	protected Rigidbody rb;
 	protected GameManager gm;
@@ -28,15 +28,17 @@ public class Enemy : MonoBehaviour
 	public virtual void KillEnemy()
 	{
 		// Call from pool later on
-		energyParticles = Instantiate(rechargeEnergyParticles, transform.position, Quaternion.identity);
+		int randomParticles = Random.Range(0, rechargeParticleList.Count);
+
+		energyParticles = Instantiate(rechargeParticleList[randomParticles], transform.position, Quaternion.identity);
 
         // Particles from Enemy parent class
-        RechargeEnergyParticles rechargeParticles = energyParticles.GetComponent<RechargeEnergyParticles>();
+        RechargeParticles rechargeParticles = energyParticles.GetComponent<RechargeParticles>();
 
         if (rechargeParticles != null)
         {
-            rechargeParticles.EnergyRechargeValue = playerEnergyRecharge;
-            Debug.Log("Recharge value: " + rechargeParticles.EnergyRechargeValue);
+            rechargeParticles.RechargeValue = onKillParticlesRecharge;
+            Debug.Log("Recharge value: " + rechargeParticles.RechargeValue);
         }
 
         Destroy(gameObject);

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23516976103075120}
   - component: {fileID: 135115478584048724}
   - component: {fileID: 54580682667955034}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BomberEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,16 +112,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f7892a29bddd34ea93fbeb79448a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rechargeEnergyParticles: {fileID: 0}
+  rechargeParticleList:
+  - {fileID: 1094205852064916, guid: 45c9b0ea0a2186c43a2d2ca17920cb37, type: 2}
+  - {fileID: 1750243828127422, guid: cb632a2417312824782e395b7e10da38, type: 2}
   health: 30
+  onKillParticlesRecharge: 5
   movementSpeed: 3
   stopAtDistance: 2
   explosionPrefab: {fileID: 1866560642259798, guid: 4371cccb3526eb94daafdc198b9bc685,
     type: 2}
   explosionDamage: 30
   timeToExplode: 2
-  explosionRadius: 2
-  explosionForce: 2000
+  explosionRadius: 0.5
+  explosionForce: 1000
 --- !u!135 &135115478584048724
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -70,7 +70,10 @@ public class CloseRangeBomber : Enemy
 
 	void Explosion()
 	{
-		Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		GameObject explosionGO = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		SphereCollider explosionSphere = explosionGO.GetComponent<SphereCollider>();
+		explosionSphere.radius = explosionRadius;
+
 		Destroy(gameObject);
 	}
 }

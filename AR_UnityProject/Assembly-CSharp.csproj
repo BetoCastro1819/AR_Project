@@ -161,11 +161,12 @@
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\ObjectsPool.cs" />
-    <Compile Include="Assets\Scripts\ParticleDestroyer.cs" />
+    <Compile Include="Assets\Scripts\ParticleS\ParticleDestroyer.cs" />
+    <Compile Include="Assets\Scripts\ParticleS\ParticleSpread.cs" />
+    <Compile Include="Assets\Scripts\ParticleS\RechargeParticles.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\Spaceship.cs" />
     <Compile Include="Assets\Scripts\PlayerMobileController.cs" />
-    <Compile Include="Assets\Scripts\RechargeEnergyParticles.cs" />
     <Compile Include="Assets\Scripts\UI\UI_ButtonActions.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Player.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Spaceship.cs" />

@@ -2,23 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserEnemy : Enemy
+public class LaserEnemy : MonoBehaviour
 {
     public float timeToShootLaser = 3f;
     public float laserDuration = 5;
+	public int laserDamage = 5;
 
     private LineRenderer laser;
 
     private float shootLaserTimer;
     private float shootingDurationTimer;
 
-
     GameObject sparks;
 
-	public override void Start ()
+	void Start ()
     {
-        base.Start();
-
         laser = GetComponent<LineRenderer>();
 
         shootLaserTimer = 0;
@@ -34,11 +32,6 @@ public class LaserEnemy : Enemy
         }
 
         transform.Rotate(new Vector3(0, 30 * Time.deltaTime, 0));
-
-        if (health <= 0)
-        {
-            KillEnemy();
-        }
     }
 
     void HandleLaserDuration()
@@ -84,7 +77,7 @@ public class LaserEnemy : Enemy
                 {
                     Spaceship player = hit.collider.GetComponent<Spaceship>();
 
-                    player.TakeDamage(1);
+                    player.TakeDamage(laserDamage);
                 }
             }
         }

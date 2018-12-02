@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114681320125779668}
   - component: {fileID: 65355591367108136}
   - component: {fileID: 54356191612564048}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShootingEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4641780919769636}
   - component: {fileID: 33423791110624164}
   - component: {fileID: 23379993071044160}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShipMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4720223875547640}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShootingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,12 +184,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e311247beb1e5294986c4b0261efbca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rechargeEnergyParticles: {fileID: 1094205852064916, guid: 45c9b0ea0a2186c43a2d2ca17920cb37,
-    type: 2}
+  rechargeParticleList:
+  - {fileID: 1094205852064916, guid: 45c9b0ea0a2186c43a2d2ca17920cb37, type: 2}
+  - {fileID: 1750243828127422, guid: cb632a2417312824782e395b7e10da38, type: 2}
   health: 10
+  onKillParticlesRecharge: 5
   explosionEffect: {fileID: 1770158330086496, guid: b1e67204573de0c4b8cfcea477d57535,
     type: 2}
-  playerEnergyRecharge: 5
   lerpSpeed: 0.01
   distToKeepFromPlayer: 5
   shootingPoint: {fileID: 1680413888813068}

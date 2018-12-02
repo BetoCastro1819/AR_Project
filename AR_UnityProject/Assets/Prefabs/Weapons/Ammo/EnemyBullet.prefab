@@ -159,4 +159,4 @@ MonoBehaviour:
   bulletSpeed: 5
   knockbackStrength: 100
   playerBulletDamage: 50
-  enemyBulletDamage: 10
+  enemyBulletDamage: 5

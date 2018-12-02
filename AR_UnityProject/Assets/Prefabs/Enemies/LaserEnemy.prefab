@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23792875949662830}
   - component: {fileID: 65671010612078074}
   - component: {fileID: 120641633910059692}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LaserEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

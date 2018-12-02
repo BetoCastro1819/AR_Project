@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RechargeEnergyParticles : MonoBehaviour
+public class RechargeParticles : MonoBehaviour
 {
+	public RechargeType rechargeType;
 	public float particleSpeed = 1f;
 	public float timeToGoToPosition = 2f;
 
-	public int EnergyRechargeValue { get; set; }
+	public int RechargeValue { get; set; }
 
 	private ParticleSystem system;
 	private ParticleSystem.Particle[] particles;
@@ -15,6 +16,12 @@ public class RechargeEnergyParticles : MonoBehaviour
 	private Spaceship player;
 
 	private float timer;
+
+	public enum RechargeType
+	{
+		HEALTH,
+		ENERGY
+	}
 
 	private void Start()
 	{
@@ -53,7 +60,15 @@ public class RechargeEnergyParticles : MonoBehaviour
 			if (Mathf.RoundToInt(particles[i].position.x) == Mathf.RoundToInt(playerPos.x) &&
 				Mathf.RoundToInt(particles[i].position.y) == Mathf.RoundToInt(playerPos.y))
 			{
-				player.RechargeEnergy(EnergyRechargeValue);
+				switch (rechargeType)
+				{
+					case RechargeType.HEALTH:
+						player.AddHeath(RechargeValue);
+						break;
+					case RechargeType.ENERGY:
+						player.RechargeEnergy(RechargeValue);
+						break;
+				}
 				particles[i].remainingLifetime = 0;
 
 				//Debug.Log(player.GetEnergyBarValue());

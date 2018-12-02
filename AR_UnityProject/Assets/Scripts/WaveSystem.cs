@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class WaveSystem : MonoBehaviour
 {
-	public GameObject enemyPrefab;
-    public GameObject waveCountdown;
+	public List<GameObject> listOfEnemies;
 	public List<Transform> spawnPoints;
-    public Text waveCountdownText;
+
+	//public GameObject waveCountdown;
+	//public Text waveCountdownText;
+
 	public float waveRate = 3f;
 	public float spawnRate = 1f;
 	public int numberOfEnemies = 5;
@@ -16,7 +18,7 @@ public class WaveSystem : MonoBehaviour
 
 	public WaveState waveState;
 
-	private bool courutineStated;
+	private bool coroutineStarted;
 	private float timer;
 	private int waveNumber;
 
@@ -32,8 +34,8 @@ public class WaveSystem : MonoBehaviour
 		waveNumber = 1;
 		timer = 0;
 		waveState = WaveState.COUNTDOWN;
-		courutineStated = false;
-        waveCountdown.SetActive(false);
+		coroutineStarted = false;
+        //waveCountdown.SetActive(false);
     }
 
     void Update()
@@ -49,7 +51,7 @@ public class WaveSystem : MonoBehaviour
 				WaveCountdown();
 				break;
 			case WaveState.SPAWNING:
-				if (!courutineStated)
+				if (!coroutineStarted)
 					StartCoroutine(WaveSpawning());
 				break;
 			case WaveState.WAITING_FOR_PLAYER:
@@ -67,27 +69,28 @@ public class WaveSystem : MonoBehaviour
 			waveState = WaveState.SPAWNING;
 			timer = 0;
 		}
-        waveCountdown.SetActive(true);
-        waveCountdownText.text = timer.ToString("0");
+        //waveCountdown.SetActive(true);
+        //waveCountdownText.text = timer.ToString("0");
 	}
 
 	IEnumerator WaveSpawning()
 	{
-		courutineStated = true;
-        waveCountdown.SetActive(false);
+		coroutineStarted = true;
+        //waveCountdown.SetActive(false);
 
         int spawnPointIndex = 0;
 		for (int i = 0; i < numberOfEnemies; i++)
 		{
-			Instantiate(enemyPrefab, spawnPoints[spawnPointIndex].transform.position, spawnPoints[spawnPointIndex].transform.rotation);
-			spawnPointIndex++;
+			int randomEnemyIndex = Random.Range(0, listOfEnemies.Count);
+			Instantiate(listOfEnemies[randomEnemyIndex], spawnPoints[spawnPointIndex].transform.position, spawnPoints[spawnPointIndex].transform.rotation);
 
+			spawnPointIndex++;
 			if (spawnPointIndex > spawnPoints.Count - 1)
 				spawnPointIndex = 0;
 
 			yield return new WaitForSeconds(spawnRate);
 		}
-		courutineStated = false;
+		coroutineStarted = false;
 		waveState = WaveState.WAITING_FOR_PLAYER;
 	}
 

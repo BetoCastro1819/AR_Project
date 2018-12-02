@@ -18,8 +18,8 @@ TagManager:
   - PostProcessing
   - PlayerBullet
   - Player
-  - 
-  - 
+  - ForceField
+  - Enemy
   - 
   - 
   - 
