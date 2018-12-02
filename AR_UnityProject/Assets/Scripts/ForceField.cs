@@ -42,9 +42,12 @@ public class ForceField : MonoBehaviour
 			//GameObject sparks = Instantiate(sparksEffect, pointOfPlayerCollision, Quaternion.identity);
 
 			GameObject sparksEffect = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);
-			sparksEffect.transform.position = pointOfPlayerCollision;
-			sparksEffect.transform.forward = dirToPushPlayer;
-			sparksEffect.SetActive(true);
+			if (sparksEffect != null)
+			{
+				sparksEffect.transform.position = pointOfPlayerCollision;
+				sparksEffect.transform.forward = dirToPushPlayer;
+				sparksEffect.SetActive(true);
+			}
 
 			Rigidbody playerRigidbody = player.GetComponent<Rigidbody>();
 

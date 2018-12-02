@@ -63,13 +63,15 @@ public class BulletBehavior : MonoBehaviour
 		}
 
 		GameObject sparks = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SPARKS_EFFECT);
-		sparks.transform.position = obj.contacts[0].point;
+		if (sparks != null)
+		{
+			sparks.transform.position = obj.contacts[0].point;
 
-        Vector3 sparksDir = originPos - obj.contacts[0].point;
-		sparks.transform.forward = sparksDir.normalized;
+			Vector3 sparksDir = originPos - obj.contacts[0].point;
+			sparks.transform.forward = sparksDir.normalized;
 
-		sparks.SetActive(true);
-
+			sparks.SetActive(true);
+		}
 		DisableBullet();
 	}
 

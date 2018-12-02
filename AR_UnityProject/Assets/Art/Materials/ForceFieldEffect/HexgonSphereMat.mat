@@ -62,13 +62,13 @@ Material:
     - _CullOff: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Distort: 59.9
+    - _Distort: 4.3
     - _DstBlend: 0
     - _Float1: 2
     - _Float2: 3
     - _Fresnel: 200
     - _FresnelIntensity: 61
-    - _FresnelWidth: 0.96
+    - _FresnelWidth: 1.29
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

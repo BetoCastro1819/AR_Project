@@ -3,6 +3,7 @@
 public class ShootingEnemy : Enemy
 {
 	public GameObject explosionEffect;
+	public ParticleSystem muzzleFlashEffect;
 
 	[Header("Movement")]
 	public float lerpSpeed = 5f;
@@ -55,6 +56,8 @@ public class ShootingEnemy : Enemy
 		if (Time.time >= fireRateTimer)
 		{
 			fireRateTimer = Time.time + 1 / shotsPerSecond;
+
+			muzzleFlashEffect.Play();
 
 			GameObject bullet = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.SHOOTING_ENEMY_BULLET);
 			bullet.transform.position = shootingPoint.transform.position;

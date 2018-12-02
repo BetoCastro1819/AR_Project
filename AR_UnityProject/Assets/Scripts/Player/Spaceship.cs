@@ -13,8 +13,10 @@ public class Spaceship : MonoBehaviour
 
     [Header("Shooting")]
     public Transform shootingPointLeft;
-    public Transform shootingPointRight;
-    public float shotsPerSecond = 10;
+	public ParticleSystem shootingEffectLeft;
+	public Transform shootingPointRight;
+	public ParticleSystem shootingEffectRight;
+	public float shotsPerSecond = 10;
     public float shootingForce = 50f;
 
     private float fireRateTimer;
@@ -154,10 +156,13 @@ public class Spaceship : MonoBehaviour
 		rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
 		EnableBullet(shootingPointLeft);
-		EnableBullet(shootingPointRight);
-    }
+		shootingEffectLeft.Play();
 
-    void AutoFire()
+		EnableBullet(shootingPointRight);
+		shootingEffectRight.Play();
+	}
+
+	void AutoFire()
     {
 		startEnergyRechargeTimer = 0;
 
@@ -173,12 +178,12 @@ public class Spaceship : MonoBehaviour
 			rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
 			EnableBullet(shootingPointLeft);
+			shootingEffectLeft.Play();
+
 			EnableBullet(shootingPointRight);
-
-			//fireRateTimer = 0;
-
+			shootingEffectRight.Play();
 		}
-    }
+	}
 
     void EnableBullet(Transform _shootingPoint)
     {
