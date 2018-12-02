@@ -77,5 +77,10 @@ public class RechargeParticles : MonoBehaviour
 
 		// Apply the particle changes to the particle system
 		system.SetParticles(particles, numParticlesAlive);
+
+		if (numParticlesAlive <= 0)
+		{
+			gameObject.SetActive(false);
+		}
 	}
 }

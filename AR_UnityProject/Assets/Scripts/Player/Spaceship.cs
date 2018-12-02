@@ -79,7 +79,8 @@ public class Spaceship : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.LeftShift) && Energy >= maxEnergy)
 		{
 			Energy = 0;
-			Instantiate(specialPower, transform.position, Quaternion.Euler(90,0,0));
+			specialPower.transform.position = transform.position;
+			specialPower.SetActive(true);
 
 			specialPowerIsActive = true;
 			specialPowerUI.SetActive(false);

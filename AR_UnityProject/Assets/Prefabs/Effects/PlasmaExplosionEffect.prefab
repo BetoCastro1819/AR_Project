@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a758147845d7b43af047bd6b6c0c8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToDisableObject: 2
 --- !u!198 &198078512062087662
 ParticleSystem:
   m_ObjectHideFlags: 1

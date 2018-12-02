@@ -26,7 +26,7 @@ public class ShootingEnemy : Enemy
 		if (health <= 0)
 		{
 			KillEnemy();
-}
+		}
 	}
 
 	void FixedUpdate()
@@ -68,6 +68,17 @@ public class ShootingEnemy : Enemy
 		base.KillEnemy();
 
 		// Ship explosion
-		Instantiate(explosionEffect, transform.position, Quaternion.identity);
+		//Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
+		GameObject explosion = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.PLASMA_EXPLOSION);
+
+		if (explosion != null &&
+			explosion.activeInHierarchy == false)
+		{
+			explosion.transform.position = transform.position;
+			explosion.SetActive(true);
+		}
+
+		Destroy(gameObject);
 	}
 }

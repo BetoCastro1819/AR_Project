@@ -70,10 +70,19 @@ public class CloseRangeBomber : Enemy
 
 	void Explosion()
 	{
-		GameObject explosionGO = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-		SphereCollider explosionSphere = explosionGO.GetComponent<SphereCollider>();
-		explosionSphere.radius = explosionRadius;
+		//GameObject explosionGO = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+		CameraShake.GetInstance().Shake();
 
+		GameObject explosionGO = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.EXPLOSION);
+
+		if (explosionGO != null && 
+			explosionGO.activeInHierarchy == false)
+		{
+			explosionGO.transform.position = transform.position;
+			explosionGO.SetActive(true);
+			SphereCollider explosionSphere = explosionGO.GetComponent<SphereCollider>();
+			explosionSphere.radius = explosionRadius;
+		}
 		Destroy(gameObject);
 	}
 }

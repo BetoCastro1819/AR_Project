@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 	protected Rigidbody rb;
 	protected GameManager gm;
 	protected Spaceship player;
-	protected GameObject energyParticles;
+	protected GameObject particlesFromPool;
 
 	public virtual void Start()
 	{
@@ -27,13 +27,29 @@ public class Enemy : MonoBehaviour
 
 	public virtual void KillEnemy()
 	{
-		// Call from pool later on
-		int randomParticles = Random.Range(0, rechargeParticleList.Count);
+		//energyParticles = Instantiate(rechargeParticleList[randomParticles], transform.position, Quaternion.identity);
 
-		energyParticles = Instantiate(rechargeParticleList[randomParticles], transform.position, Quaternion.identity);
+		CameraShake.GetInstance().Shake();
 
-        // Particles from Enemy parent class
-        RechargeParticles rechargeParticles = energyParticles.GetComponent<RechargeParticles>();
+		int randomParticles = Random.Range(0, 2);
+		if (randomParticles == 0)
+		{
+			particlesFromPool = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.ENERGY_PARTICLES);
+		}
+		else if (randomParticles == 1)
+		{
+			particlesFromPool = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.HEALTH_PARTICLES);
+		}
+
+		if (particlesFromPool != null &&
+			particlesFromPool.activeInHierarchy == false)
+		{
+			particlesFromPool.SetActive(true);
+			particlesFromPool.transform.position = transform.position; 
+		}
+
+		// Particles from Enemy parent class
+		RechargeParticles rechargeParticles = particlesFromPool.GetComponent<RechargeParticles>();
 
         if (rechargeParticles != null)
         {
@@ -41,6 +57,6 @@ public class Enemy : MonoBehaviour
             Debug.Log("Recharge value: " + rechargeParticles.RechargeValue);
         }
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

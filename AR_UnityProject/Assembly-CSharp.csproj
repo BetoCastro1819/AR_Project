@@ -161,9 +161,9 @@
     <Compile Include="Assets\Scripts\Inventory\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\ObjectPoolManager.cs" />
     <Compile Include="Assets\Scripts\ObjectsPool.cs" />
-    <Compile Include="Assets\Scripts\ParticleS\ParticleDestroyer.cs" />
-    <Compile Include="Assets\Scripts\ParticleS\ParticleSpread.cs" />
-    <Compile Include="Assets\Scripts\ParticleS\RechargeParticles.cs" />
+    <Compile Include="Assets\Scripts\Particles\ObjectTimedDisabler.cs" />
+    <Compile Include="Assets\Scripts\Particles\ParticleSpread.cs" />
+    <Compile Include="Assets\Scripts\Particles\RechargeParticles.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\Spaceship.cs" />
     <Compile Include="Assets\Scripts\PlayerMobileController.cs" />
@@ -197,6 +197,7 @@
     <None Include="Assets\Kenney Assets\Space Kit\License.txt" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_FaceHighlight.shader" />
     <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceReflection.shader" />
+    <None Include="Assets\Art\Materials\ForceFieldEffect\ShieldFX.shader" />
     <None Include="Assets\MobileDepthWater\Shaders\WaterOpaque\Height\DiffuseColorHeightWater.shader" />
     <None Include="Assets\PostProcessing\Utilities\CustomMotionTexture\Shaders\CustomMotionVectorTexture.shader" />
     <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />

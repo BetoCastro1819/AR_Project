@@ -34,14 +34,25 @@ public class ParticleSpread : MonoBehaviour
 		durationTimer += Time.deltaTime;
 		if (durationTimer <= explosionDuration)
 		{
+			CameraShake.GetInstance().Shake();
 			sphereCollider.radius += expansionFactor;
 
 			emissionShape.radius = sphereCollider.radius;
 		}
 		else
 		{
-			gameObject.SetActive(false);
+			ResetExplosionValues();
 		}
+	}
+
+	void ResetExplosionValues()
+	{
+		durationTimer = 0;
+
+		sphereCollider.radius = initialRadius;
+		emissionShape.radius = sphereCollider.radius;
+
+		gameObject.SetActive(false);
 	}
 
 	private void OnTriggerEnter(Collider other)

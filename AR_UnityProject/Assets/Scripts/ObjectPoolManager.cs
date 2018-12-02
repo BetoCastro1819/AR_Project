@@ -20,12 +20,20 @@ public class ObjectPoolManager : MonoBehaviour
 	public ObjectsPool playerBulletsPool;
 	public ObjectsPool shootingEnemyBulletsPool;
 	public ObjectsPool sparksEffectPool;
+	public ObjectsPool explosionsPool;
+	public ObjectsPool plasmaExplosionsPool;
+	public ObjectsPool rechargeHealthPool;
+	public ObjectsPool rechargeEnergyPool;
 
 	public enum ObjectType
 	{
 		PLAYER_BULLET,
 		SHOOTING_ENEMY_BULLET,
-		SPARKS_EFFECT
+		SPARKS_EFFECT,
+		EXPLOSION,
+		PLASMA_EXPLOSION,
+		ENERGY_PARTICLES,
+		HEALTH_PARTICLES,
 	}
 
 	public GameObject GetObjectFromPool(ObjectType objectType)
@@ -43,7 +51,18 @@ public class ObjectPoolManager : MonoBehaviour
 			case ObjectType.SHOOTING_ENEMY_BULLET:
 				pooledObject = shootingEnemyBulletsPool.GetObjectPooled();
 				break;
-
+			case ObjectType.EXPLOSION:
+				pooledObject = explosionsPool.GetObjectPooled();
+				break;
+			case ObjectType.PLASMA_EXPLOSION:
+				pooledObject = plasmaExplosionsPool.GetObjectPooled();
+				break;
+			case ObjectType.HEALTH_PARTICLES:
+				pooledObject = rechargeHealthPool.GetObjectPooled();
+				break;
+			case ObjectType.ENERGY_PARTICLES:
+				pooledObject = rechargeEnergyPool.GetObjectPooled();
+				break;
 		}
 		return pooledObject;
 	}
