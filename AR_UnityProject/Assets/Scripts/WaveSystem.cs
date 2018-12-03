@@ -5,8 +5,14 @@ using UnityEngine.UI;
 
 public class WaveSystem : MonoBehaviour
 {
+	public GameObject laserWarningUI;
+
 	public List<GameObject> listOfEnemies;
+	public List<GameObject> listOfLaserRobots;
 	public List<Transform> spawnPoints;
+
+	public int wavesForLaserEvent = 2;
+	public int laserRobotsToActivate = 1;
 
 	//public GameObject waveCountdown;
 	//public Text waveCountdownText;
@@ -16,31 +22,43 @@ public class WaveSystem : MonoBehaviour
 	public int numberOfEnemies = 5;
 	public int addEnemiesPerWave = 3;
 
-	public WaveState waveState;
-
 	private bool coroutineStarted;
-	private float timer;
 	private int waveNumber;
+	private int laserEventAtWave;
 
+	private float laserRobotsDuration;
+	private float timer;
+
+	public WaveState waveState;
 	public enum WaveState
 	{
 		COUNTDOWN,
 		SPAWNING,
+		LASER_ROBOTS,
 		WAITING_FOR_PLAYER
 	}
 
 	void Start()
 	{
 		waveNumber = 1;
+		laserEventAtWave = wavesForLaserEvent + waveNumber;
 		timer = 0;
 		waveState = WaveState.COUNTDOWN;
 		coroutineStarted = false;
-        //waveCountdown.SetActive(false);
+
+		LaserEnemy laserRobot = listOfLaserRobots[0].GetComponent<LaserEnemy>();
+		float animationOffset = 1f;
+		laserRobotsDuration = laserRobot.warningDuration + laserRobot.shootingLaserDuration + animationOffset;
+
+		//waveCountdown.SetActive(false);
     }
 
     void Update()
 	{
-		WaveFSM();
+		if (GameManager.GetInstance().GameOver == false)
+		{
+			WaveFSM();
+		}
 	}
 
 	void WaveFSM()
@@ -52,7 +70,12 @@ public class WaveSystem : MonoBehaviour
 				break;
 			case WaveState.SPAWNING:
 				if (!coroutineStarted)
+				{
 					StartCoroutine(WaveSpawning());
+				}
+				break;
+			case WaveState.LASER_ROBOTS:
+				LaserRobotsEvent();
 				break;
 			case WaveState.WAITING_FOR_PLAYER:
 				CheckForAliveEnemies();
@@ -62,11 +85,19 @@ public class WaveSystem : MonoBehaviour
 
 	void WaveCountdown()
 	{
-		timer -= Time.deltaTime;
-		if (timer <= 1)
+		timer += Time.deltaTime;
+		if (timer >= 1)
 		{
-			// Start spawning enemies
-			waveState = WaveState.SPAWNING;
+			if (waveNumber >= laserEventAtWave)
+			{
+				waveState = WaveState.LASER_ROBOTS;
+				laserEventAtWave = waveNumber + wavesForLaserEvent;
+			}
+			else
+			{
+				waveState = WaveState.SPAWNING;
+			}
+
 			timer = 0;
 		}
         //waveCountdown.SetActive(true);
@@ -92,6 +123,35 @@ public class WaveSystem : MonoBehaviour
 		}
 		coroutineStarted = false;
 		waveState = WaveState.WAITING_FOR_PLAYER;
+	}
+
+	void LaserRobotsEvent()
+	{
+		laserWarningUI.SetActive(true);
+
+		for (int i = 0; i < laserRobotsToActivate; i++)
+		{
+			if (listOfLaserRobots[i].activeInHierarchy == false)
+			{
+				listOfLaserRobots[i].SetActive(true);
+			}
+		}
+
+		timer += Time.deltaTime;
+		if (timer >= laserRobotsDuration)
+		{
+			waveState = WaveState.COUNTDOWN;
+
+			laserWarningUI.SetActive(false);
+			timer = 0;
+
+			laserRobotsToActivate++;
+
+			if (laserRobotsToActivate > listOfLaserRobots.Count)
+			{
+				laserRobotsToActivate = listOfLaserRobots.Count;
+			}
+		}
 	}
 
 	void CheckForAliveEnemies()

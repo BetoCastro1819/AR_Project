@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 	public List<GameObject> rechargeParticleList;
 	public int health = 100;
     public int onKillParticlesRecharge = 10;
+	public int onKillScore = 150;
 
 	protected Rigidbody rb;
 	protected GameManager gm;
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
 		gm = GameManager.GetInstance();
 		rb = GetComponent<Rigidbody>();
 		player = gm.GetPlayer();
+		gm.enemiesAlive++;
 	}
 
 	public void TakeDamage(int damage)
@@ -59,4 +61,10 @@ public class Enemy : MonoBehaviour
 
         //Destroy(gameObject);
     }
+
+	private void OnDestroy()
+	{
+		player.Score += onKillScore;
+		gm.enemiesAlive--;
+	}
 }

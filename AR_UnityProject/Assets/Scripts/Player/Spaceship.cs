@@ -38,8 +38,9 @@ public class Spaceship : MonoBehaviour
 	private bool specialPowerIsActive;
 	private float specialPowerTimer;
 
-	public int Health { get; set; }
-    public int Energy { get; set; }
+	public int Health	{ get; set; }
+    public int Energy	{ get; set; }
+	public int Score	{ get; set; }
 
     private Rigidbody rb;
     
@@ -54,9 +55,10 @@ public class Spaceship : MonoBehaviour
         rechargeRateTimer = 0;
 		specialPowerTimer = 0;
 
-        // Initialize bar´s values
+        // Initialize player values
         Health = maxHealth;
         Energy = maxEnergy;
+		Score = 0;
 
         isShooting = false;
 

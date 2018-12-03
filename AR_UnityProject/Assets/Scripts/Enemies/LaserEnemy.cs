@@ -20,10 +20,6 @@ public class LaserEnemy : MonoBehaviour
 	private LineRenderer laser;
 	private Animator animator;
 
-	private float shootLaserTimer;
-	private float shootingDurationTimer;
-
-
 	private float timer = 0;
 
 	private LaserState laserState;
@@ -35,18 +31,19 @@ public class LaserEnemy : MonoBehaviour
 		LEAVE
 	}
 
-
-	void Start()
+	private void OnEnable()
 	{
-		laser = GetComponent<LineRenderer>();
 		animator = GetComponent<Animator>();
+
+		laser = GetComponent<LineRenderer>();
+		laser.SetPosition(0, transform.position);
+		laser.SetPosition(1, transform.position);
 
 		timer = 0;
 
-		shootLaserTimer = 0;
-		shootingDurationTimer = 0;
-
 		laserState = LaserState.SPAWN;
+
+		animator.SetBool("TimeToLeave", false);
 	}
 
 	void Update()
@@ -121,15 +118,13 @@ public class LaserEnemy : MonoBehaviour
 	{
 		laser.SetPosition(1, transform.position);
 
-		animator.SetTrigger("TimeToLeave");
+		animator.SetBool("TimeToLeave", true);
 	}
 
 	void ShootLaserBeam(bool causeDamage, float laserWidth)
     {
 		laser.startWidth	= laserWidth;
 		laser.endWidth		= laserWidth;
-
-        laser.SetPosition(0, transform.position);
 
 		RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit))

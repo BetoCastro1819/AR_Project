@@ -20,10 +20,11 @@ public class GameManager : MonoBehaviour
 	public int enemiesAlive = 0;
 	public int enemiesKilled = 0;
 
-	private bool gameOver;
 	private int waveNumber;
 	private int playerScore;
     private int waveToUnlockItem;
+
+	public bool GameOver { get; set; }
 
 	#region Singleton
 	private static GameManager instance;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
 
 	private void Start()
 	{
-		gameOver = false;
+		GameOver = false;
 		playerScore = 0;
         waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
 	}
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
             if (gameOverScreen.activeSelf == false)
             {
                 Debug.Log("GAME OVER");
-                gameOver = true;
+                GameOver = true;
                 gameOverScreen.SetActive(true);
             }
         }
@@ -83,8 +84,6 @@ public class GameManager : MonoBehaviour
 		}
 		*/
     }
-
-    public void SetGameOver(bool setBool) { gameOver = setBool; }
 
     public void SetWaveNumber(int num) { waveNumber = num; }
 	public int GetWaveNumber() { return waveNumber; }

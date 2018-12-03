@@ -116,14 +116,14 @@ MonoBehaviour:
   - {fileID: 1094205852064916, guid: 45c9b0ea0a2186c43a2d2ca17920cb37, type: 2}
   - {fileID: 1750243828127422, guid: cb632a2417312824782e395b7e10da38, type: 2}
   health: 30
-  onKillParticlesRecharge: 5
+  onKillParticlesRecharge: 1
   movementSpeed: 3
   stopAtDistance: 2
   explosionPrefab: {fileID: 1866560642259798, guid: 4371cccb3526eb94daafdc198b9bc685,
     type: 2}
   explosionDamage: 30
-  timeToExplode: 2
-  explosionRadius: 0.5
+  timeToExplode: 0
+  explosionRadius: 2
   explosionForce: 1000
 --- !u!135 &135115478584048724
 SphereCollider:
