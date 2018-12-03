@@ -64,8 +64,12 @@ public class Spaceship : MonoBehaviour
 
 		shootingButtonPressed = false;
 
-		specialPowerDuration = specialPower.GetComponent<ParticleSpread>().explosionDuration;
-		specialPowerIsActive = false;
+		if (specialPower != null)
+		{
+			specialPowerDuration = specialPower.GetComponent<ParticleSpread>().explosionDuration;
+			specialPowerIsActive = false;
+		}
+
 		Energy = 0;
 	}
 
@@ -74,7 +78,7 @@ public class Spaceship : MonoBehaviour
         Rotation();
         Shoot();
 
-        if (Energy >= maxEnergy)
+		if (Energy >= maxEnergy && specialPower != null)
         {
 			specialPowerUI.SetActive(true);
 		}
@@ -83,12 +87,15 @@ public class Spaceship : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.LeftShift) && Energy >= maxEnergy)
 		{
 			Energy = 0;
-			specialPower.transform.position = transform.position;
-			specialPower.SetActive(true);
 
-			specialPowerIsActive = true;
-			specialPowerUI.SetActive(false);
+			if (specialPower != null)
+			{
+				specialPower.transform.position = transform.position;
+				specialPower.SetActive(true);
 
+				specialPowerIsActive = true;
+				specialPowerUI.SetActive(false);
+			}
 			rb.velocity = Vector3.zero;
 		}
 
@@ -189,17 +196,20 @@ public class Spaceship : MonoBehaviour
 
     void EnableBullet(Transform _shootingPoint)
     {
-		GameObject bullet = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.PLAYER_BULLET); 
-        if (bullet.activeInHierarchy == false)
-        {
-			// Sets the origin to know whick direction to spawn the particles when colliding
-            bullet.GetComponent<BulletBehavior>().SetOriginPos(transform.position);
+		GameObject bullet = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.PLAYER_BULLET);
+		if (bullet != null)
+		{
+			if (bullet.activeInHierarchy == false)
+			{
+				// Sets the origin to know whick direction to spawn the particles when colliding
+				bullet.GetComponent<BulletBehavior>().SetOriginPos(transform.position);
 
-            bullet.transform.position = _shootingPoint.position;
-            bullet.transform.rotation = _shootingPoint.rotation;
-            bullet.SetActive(true);
-        }
-    }
+				bullet.transform.position = _shootingPoint.position;
+				bullet.transform.rotation = _shootingPoint.rotation;
+				bullet.SetActive(true);
+			}
+		}
+	}
 
     void KillPlayer()
     {

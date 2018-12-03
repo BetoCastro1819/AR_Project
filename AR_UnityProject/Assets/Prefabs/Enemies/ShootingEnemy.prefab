@@ -202,8 +202,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.73, y: 1, z: 1.33}
-  m_Center: {x: 0, y: 0, z: -0.09}
+  m_Size: {x: 1.73, y: 0.7, z: 1.33}
+  m_Center: {x: 0, y: 0.12, z: 0.03}
 --- !u!114 &114681320125779668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,6 +220,7 @@ MonoBehaviour:
   - {fileID: 1750243828127422, guid: cb632a2417312824782e395b7e10da38, type: 2}
   health: 10
   onKillParticlesRecharge: 1
+  onKillScore: 150
   explosionEffect: {fileID: 1770158330086496, guid: b1e67204573de0c4b8cfcea477d57535,
     type: 2}
   muzzleFlashEffect: {fileID: 198960320285924980}

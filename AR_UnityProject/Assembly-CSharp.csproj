@@ -167,7 +167,7 @@
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\Spaceship.cs" />
     <Compile Include="Assets\Scripts\PlayerMobileController.cs" />
-    <Compile Include="Assets\Scripts\UI\UI_ButtonActions.cs" />
+    <Compile Include="Assets\Scripts\UI\UI_MenuScreen.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Player.cs" />
     <Compile Include="Assets\Scripts\UI\UI_Spaceship.cs" />
     <Compile Include="Assets\Scripts\Vuforia\AutoFocusCamera.cs" />
