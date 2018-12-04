@@ -5,32 +5,52 @@ using UnityEngine.SceneManagement;
 
 public class UI_MenuScreen : MonoBehaviour
 {
+	[Header("On PC")]
+	public GameObject spacebarUI;
+	public GameObject leftArrowKeyUI;
+	public GameObject rightArrowKeyUI;
+
+	[Header("On Mobile")]
+	public GameObject joystickUI;
+	public GameObject shootButtonUI;
+
 	public GameObject resetButton;
 	public GameObject player;
 	public Transform shipMenuPosition;
 
 	public float timeToEnableResetButton = 5f;
 
-	public GameObject controlsScreen;
-	public GameObject mainMenuScreen;
-
 	private float timer;
 	private bool playerHasMoved;
+
+	private bool onMobileDevice;
+	private ShootButton shootButton;
 
 	private void Start()
 	{
 		timer = 0;
 		playerHasMoved = false;
+
+		onMobileDevice = false;
+
+#if UNITY_ANDROID
+		onMobileDevice = true;
+#endif
+
+		if (onMobileDevice)
+		{
+			EnableMobileInput(onMobileDevice);
+			shootButton = shootButtonUI.GetComponent<ShootButton>();
+		}
+		else
+		{
+			EnableMobileInput(onMobileDevice);
+		}
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			playerHasMoved = true;
-		}
-
-		if (playerHasMoved)
+		if (PlayerHasMoved())
 		{
 			timer += Time.deltaTime;
 			if (timer >= timeToEnableResetButton)
@@ -41,36 +61,44 @@ public class UI_MenuScreen : MonoBehaviour
 		}
 	}
 
-	public void Play(string sceneToLoad)
+	bool PlayerHasMoved()
 	{
-		SceneManager.LoadScene(sceneToLoad);
+		if (!onMobileDevice)
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				playerHasMoved = true;
+			}
+		}
+		else
+		{
+			if (shootButton.Pressed)
+			{
+				playerHasMoved = true;
+			}
+		}
+
+		return playerHasMoved;
 	}
 
-	public void Controls()
+	public void EnableMobileInput(bool onMobile)
 	{
-		controlsScreen.SetActive(true);
-		mainMenuScreen.SetActive(false);
+		spacebarUI.SetActive(!onMobile);
+		leftArrowKeyUI.SetActive(!onMobile);
+		rightArrowKeyUI.SetActive(!onMobile);
+
+		joystickUI.SetActive(onMobile);
+		shootButtonUI.SetActive(onMobile);
+	}
+
+	public void LoadScene(string sceneName)
+	{
+		SceneManager.LoadScene(sceneName);
 	}
 
 	public void Quit()
 	{
 		Application.Quit();
-	}
-
-	public void Back()
-	{
-		controlsScreen.SetActive(false);
-		mainMenuScreen.SetActive(true);
-	}
-
-	public void MainMenu()
-	{
-		SceneManager.LoadScene("MenuScene");
-	}
-
-	public void Replay()
-	{
-		SceneManager.LoadScene("MainScene");
 	}
 
 	public void ResetShipPosition()

@@ -12,9 +12,10 @@ public class Spaceship : MonoBehaviour
 	public float rotationSpeed = 20f;
 
 	[Header("Mobile Input")]
-	public bool onMobileDevice;
 	public Joystick joystick;
 	public ShootButton shootButton;
+
+	private bool onMobileDevice;
 	// Add special power button
 
     [Header("Shooting")]
@@ -26,13 +27,10 @@ public class Spaceship : MonoBehaviour
     public float shootingForce = 50f;
 
     private float fireRateTimer;
-    private bool isShooting;
+
 
     [Header("Energy")]
     public int maxEnergy = 100;
-    public int valueForAutoRecharge = 1;
-    public float rechargeRate = 0.1f;
-    public float timeTostartRecharge = 0.5f;
 	
     private float rechargeRateTimer;
     private float startEnergyRechargeTimer;
@@ -47,7 +45,33 @@ public class Spaceship : MonoBehaviour
 	public int Score	{ get; set; }
 
     private Rigidbody rb;
-    
+
+	private void Awake()
+	{
+		onMobileDevice = false;
+
+
+#if UNITY_ANDROID
+		onMobileDevice = true;
+		Application.targetFrameRate = 60;
+#endif
+
+		if (joystick != null &&
+			shootButton != null)
+		{
+			if (onMobileDevice)
+			{
+				joystick.gameObject.SetActive(true);
+				shootButton.gameObject.SetActive(true);
+			}
+			else
+			{
+				joystick.gameObject.SetActive(false);
+				shootButton.gameObject.SetActive(false);
+			}
+		}
+	}
+
 	void Start ()
     {
         // Get rigidbody for adding force when shooting
@@ -64,8 +88,6 @@ public class Spaceship : MonoBehaviour
         Energy = maxEnergy;
 		Score = 0;
 
-        isShooting = false;
-
 		if (specialPower != null)
 		{
 			specialPowerDuration = specialPower.GetComponent<ParticleSpread>().explosionDuration;
@@ -78,13 +100,7 @@ public class Spaceship : MonoBehaviour
 	void Update ()
     {
         Rotation();
-
-		//Shoot();
-
-		if (shootButton.Pressed)
-		{
-			AutoFire();
-		}
+		Shoot();
 
 		if (Energy >= maxEnergy && specialPower != null)
         {
@@ -164,27 +180,30 @@ public class Spaceship : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ManualFire();
-        }
-        else if (Input.GetKey(KeyCode.Space))
-        {
-            AutoFire();
-        }
-        else
-        {
-            isShooting = false;
-        }
-    }
+		if (!onMobileDevice)
+		{
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				ManualFire();
+			}
+			else if (Input.GetKey(KeyCode.Space))
+			{
+				AutoFire();
+			}
+		}
+		else
+		{
+			if (shootButton.Pressed)
+			{
+				AutoFire();
+			}
+		}
+	}
 
-    void ManualFire()
+	void ManualFire()
     {
 		startEnergyRechargeTimer = 0;
 
-		isShooting = true;
-
-		//rb.velocity = Vector3.zero;
 		rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
 		EnableBullet(shootingPointLeft);
@@ -198,15 +217,10 @@ public class Spaceship : MonoBehaviour
     {
 		startEnergyRechargeTimer = 0;
 
-		isShooting = true;
-
-		//fireRateTimer += Time.deltaTime;
 		if (Time.time >= fireRateTimer)
 		{
-
 			fireRateTimer = Time.time + 1 / shotsPerSecond;
 
-			//rb.velocity = Vector3.zero;
 			rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
 
 			EnableBullet(shootingPointLeft);
@@ -238,7 +252,8 @@ public class Spaceship : MonoBehaviour
     {
 		//Instantiate(explosionEffect, transform.position, Quaternion.identity);
 
-
+		joystick.gameObject.SetActive(false);
+		shootButton.gameObject.SetActive(false);
 
 		GameObject explosion = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.EXPLOSION);
 		if (explosion != null)
@@ -250,22 +265,6 @@ public class Spaceship : MonoBehaviour
 		GameManager.GetInstance().PlayerFinalScore = Score;
 		Destroy(gameObject);
 	}
-
-    //------------------------------ ENERGY BAR ------------------------------- //
-    private void AutomaticEnergyRecharge()
-    {
-        rechargeRateTimer += Time.deltaTime;
-        if (Energy < maxEnergy && 
-            rechargeRateTimer > rechargeRate)
-        {
-            Energy += valueForAutoRecharge;
-            rechargeRateTimer = 0;
-        }
-        else
-        {
-            startEnergyRechargeTimer = 0;
-        }
-    }
 
     public void RechargeEnergy(int energyToAdd)
     {
@@ -357,22 +356,4 @@ public class Spaceship : MonoBehaviour
         return currentHealthPercentage / 100;
     }
 	//---------------------------------------------------------------------------- //
-
-	private void OnCollisionEnter(Collision collision)
-	{
-		//Debug.Log(collision.gameObject.name);
-	}
-
-
-	/*------------ MOBILE INPUT -------------*/
-
-	public void LeftArrowButton()
-	{
-		transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
-	}
-
-	public void RightArrowButton()
-	{
-		transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
-	}
 }
