@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CloseRangeBomber : Enemy
 {
-	public int onKillScore = 250;
-
 	[Header("Movement")]
 	public float movementSpeed = 20f;
 	public float stopAtDistance = 2f;
@@ -87,6 +85,7 @@ public class CloseRangeBomber : Enemy
 		}
 
 		player.Score += onKillScore;
+
 		Destroy(gameObject);
 	}
 }

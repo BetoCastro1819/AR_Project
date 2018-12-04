@@ -218,7 +218,7 @@ MonoBehaviour:
   rechargeParticleList:
   - {fileID: 1094205852064916, guid: 45c9b0ea0a2186c43a2d2ca17920cb37, type: 2}
   - {fileID: 1750243828127422, guid: cb632a2417312824782e395b7e10da38, type: 2}
-  health: 10
+  health: 30
   onKillParticlesRecharge: 1
   onKillScore: 150
   explosionEffect: {fileID: 1770158330086496, guid: b1e67204573de0c4b8cfcea477d57535,

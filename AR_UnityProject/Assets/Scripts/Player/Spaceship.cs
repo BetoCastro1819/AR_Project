@@ -8,8 +8,14 @@ public class Spaceship : MonoBehaviour
 	public GameObject specialPower;
 	public GameObject specialPowerUI;
 
-    public int maxHealth = 100;
+	public int maxHealth = 100;
 	public float rotationSpeed = 20f;
+
+	[Header("Mobile Input")]
+	public bool onMobileDevice;
+	public Joystick joystick;
+	public ShootButton shootButton;
+	// Add special power button
 
     [Header("Shooting")]
     public Transform shootingPointLeft;
@@ -30,8 +36,6 @@ public class Spaceship : MonoBehaviour
 	
     private float rechargeRateTimer;
     private float startEnergyRechargeTimer;
-
-	private bool shootingButtonPressed;
 
 	/* SPECIAL POWER */
 	private float specialPowerDuration;
@@ -62,8 +66,6 @@ public class Spaceship : MonoBehaviour
 
         isShooting = false;
 
-		shootingButtonPressed = false;
-
 		if (specialPower != null)
 		{
 			specialPowerDuration = specialPower.GetComponent<ParticleSpread>().explosionDuration;
@@ -76,7 +78,13 @@ public class Spaceship : MonoBehaviour
 	void Update ()
     {
         Rotation();
-        Shoot();
+
+		//Shoot();
+
+		if (shootButton.Pressed)
+		{
+			AutoFire();
+		}
 
 		if (Energy >= maxEnergy && specialPower != null)
         {
@@ -129,23 +137,38 @@ public class Spaceship : MonoBehaviour
 
     void Rotation()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
-        }
-    }
+		if (onMobileDevice)
+		{
+			float x = joystick.Horizontal;
+			float y = joystick.Vertical;
+
+			if (x != 0 && y != 0)
+			{
+				transform.eulerAngles = new Vector3(transform.eulerAngles.x,
+													Mathf.Atan2(x, y) * Mathf.Rad2Deg,
+													transform.eulerAngles.z);
+			}
+		}
+		else
+		{
+			if (Input.GetKey(KeyCode.RightArrow))
+			{
+				transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
+			}
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
+			}
+		}
+	}
 
     void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || shootingButtonPressed)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ManualFire();
         }
-        else if (Input.GetKey(KeyCode.Space) || shootingButtonPressed)
+        else if (Input.GetKey(KeyCode.Space))
         {
             AutoFire();
         }
@@ -213,7 +236,18 @@ public class Spaceship : MonoBehaviour
 
     void KillPlayer()
     {
-		Instantiate(explosionEffect, transform.position, Quaternion.identity);
+		//Instantiate(explosionEffect, transform.position, Quaternion.identity);
+
+
+
+		GameObject explosion = ObjectPoolManager.GetInstance().GetObjectFromPool(ObjectPoolManager.ObjectType.EXPLOSION);
+		if (explosion != null)
+		{
+			explosion.transform.position = transform.position;
+			explosion.SetActive(true);
+		}
+
+		GameManager.GetInstance().PlayerFinalScore = Score;
 		Destroy(gameObject);
 	}
 
@@ -341,10 +375,4 @@ public class Spaceship : MonoBehaviour
 	{
 		transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
 	}
-
-	public void ShootButton()
-	{
-		shootingButtonPressed = true;
-	}
-
 }

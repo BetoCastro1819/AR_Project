@@ -66,5 +66,6 @@ public class Enemy : MonoBehaviour
 	{
 		player.Score += onKillScore;
 		gm.enemiesAlive--;
+		gm.enemiesKilled++;
 	}
 }

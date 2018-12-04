@@ -11,20 +11,16 @@ public class GameManager : MonoBehaviour
 	public GameObject newItemScreen;
 
 	public GameObject gameOverScreen;
-    public PlayerInventory inventory;
-	public int unlockedItems = 0;
-    public int wavesToUnlockNewItem = 3;
-	public int extraAmmoEarnedPerWave = 3;
 
 	//[HideInInspector]
 	public int enemiesAlive = 0;
 	public int enemiesKilled = 0;
 
 	private int waveNumber;
-	private int playerScore;
     private int waveToUnlockItem;
 
 	public bool GameOver { get; set; }
+	public int PlayerFinalScore { get; set; }
 
 	#region Singleton
 	private static GameManager instance;
@@ -43,8 +39,8 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		GameOver = false;
-		playerScore = 0;
-        waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
+
+		PlayerFinalScore = 0;
 	}
 
 	private void Update()
@@ -88,7 +84,5 @@ public class GameManager : MonoBehaviour
     public void SetWaveNumber(int num) { waveNumber = num; }
 	public int GetWaveNumber() { return waveNumber; }
 
-    public int GetPlayerScore() { return playerScore; }
-	public void SetPlayerScore(int score) { playerScore = score; }
 	public Spaceship GetPlayer() { return player; }
 }
