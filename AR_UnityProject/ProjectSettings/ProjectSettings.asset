@@ -155,7 +155,7 @@ PlayerSettings:
     Standalone: com.Magenta.FoundWaterOnMars
   buildNumber: {}
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 21
+  AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 

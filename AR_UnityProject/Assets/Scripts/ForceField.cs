@@ -31,11 +31,7 @@ public class ForceField : MonoBehaviour
 		if (collision.gameObject.tag == "Player")
 		{
 			Vector3 zeroXZ = new Vector3(0, transform.position.y, 0);
-
-
 			Vector3 pointOfPlayerCollision = collision.contacts[0].point;
-
-
 			Vector3 dirToPushPlayer =  zeroXZ - pointOfPlayerCollision;
 
 
@@ -53,7 +49,7 @@ public class ForceField : MonoBehaviour
 
 			playerRigidbody.AddForce(dirToPushPlayer.normalized * pushPlayerForce);
 
-			player.TakeDamage(damagePlayer);
+			//player.TakeDamage(damagePlayer);
 
 			//Debug.Log("PLAYER IS TOUCHING ME!!!");
 			/*
