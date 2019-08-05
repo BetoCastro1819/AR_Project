@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class UI_MenuScreen : MonoBehaviour
 {
 	[Header("On PC")]
-	public GameObject spacebarUI;
-	public GameObject leftArrowKeyUI;
-	public GameObject rightArrowKeyUI;
+	//public GameObject spacebarUI;
+	//public GameObject leftArrowKeyUI;
+	//public GameObject rightArrowKeyUI;
+	public GameObject pcInput;
 
 	[Header("On Mobile")]
 	public GameObject joystickUI;
@@ -83,9 +84,7 @@ public class UI_MenuScreen : MonoBehaviour
 
 	public void EnableMobileInput(bool onMobile)
 	{
-		spacebarUI.SetActive(!onMobile);
-		leftArrowKeyUI.SetActive(!onMobile);
-		rightArrowKeyUI.SetActive(!onMobile);
+		pcInput.SetActive(!onMobile);
 
 		joystickUI.SetActive(onMobile);
 		shootButtonUI.SetActive(onMobile);

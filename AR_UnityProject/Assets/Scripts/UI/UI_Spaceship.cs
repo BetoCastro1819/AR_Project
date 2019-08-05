@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UI_Spaceship : MonoBehaviour
 {
+	public GameObject pauseMenuScreen;
+
     public Spaceship player;
 
     public Slider playerHealth;
@@ -35,5 +37,11 @@ public class UI_Spaceship : MonoBehaviour
 			playerScore.text = player.Score.ToString("000000000");
 			previousScore = player.Score;
 		}
+	}
+
+	public void OpenPauseMenu()
+	{
+		Time.timeScale = 0;
+		pauseMenuScreen.SetActive(true);
 	}
 }

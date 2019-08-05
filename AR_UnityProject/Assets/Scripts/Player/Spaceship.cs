@@ -14,9 +14,10 @@ public class Spaceship : MonoBehaviour
 	[Header("Mobile Input")]
 	public Joystick joystick;
 	public ShootButton shootButton;
+	public GameObject pauseMenuButton;
+	public GameObject activatePowerButton;
 
 	private bool onMobileDevice;
-	// Add special power button
 
     [Header("Shooting")]
     public Transform shootingPointLeft;
@@ -35,10 +36,11 @@ public class Spaceship : MonoBehaviour
     private float rechargeRateTimer;
     private float startEnergyRechargeTimer;
 
-	/* SPECIAL POWER */
 	private float specialPowerDuration;
 	private bool specialPowerIsActive;
 	private float specialPowerTimer;
+	private bool powerActivated;
+
 
 	public int Health	{ get; set; }
     public int Energy	{ get; set; }
@@ -46,44 +48,28 @@ public class Spaceship : MonoBehaviour
 
     private Rigidbody rb;
 
-	private void Awake()
-	{
+	void Start ()
+    {
 		onMobileDevice = false;
-
-
 #if UNITY_ANDROID
 		onMobileDevice = true;
 		Application.targetFrameRate = 60;
 #endif
 
-		if (joystick != null &&
-			shootButton != null)
+		if (joystick != null && shootButton != null && pauseMenuButton != null)
 		{
-			if (onMobileDevice)
-			{
-				joystick.gameObject.SetActive(true);
-				shootButton.gameObject.SetActive(true);
-			}
-			else
-			{
-				joystick.gameObject.SetActive(false);
-				shootButton.gameObject.SetActive(false);
-			}
+			joystick.gameObject.SetActive(onMobileDevice);
+			shootButton.gameObject.SetActive(onMobileDevice);
+			pauseMenuButton.SetActive(onMobileDevice);
 		}
-	}
 
-	void Start ()
-    {
-        // Get rigidbody for adding force when shooting
-        rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody>();
 
-        // Initiaze timers at 0
         startEnergyRechargeTimer = 0;
         fireRateTimer = 0;
         rechargeRateTimer = 0;
 		specialPowerTimer = 0;
 
-        // Initialize player values
         Health = maxHealth;
         Energy = maxEnergy;
 		Score = 0;
@@ -95,9 +81,10 @@ public class Spaceship : MonoBehaviour
 		}
 
 		Energy = 0;
+		powerActivated = false;
 	}
 
-	void Update ()
+	void FixedUpdate ()
     {
         Rotation();
 		Shoot();
@@ -105,23 +92,28 @@ public class Spaceship : MonoBehaviour
 		if (Energy >= maxEnergy && specialPower != null)
         {
 			specialPowerUI.SetActive(true);
-		}
 
-		// Activate Special Power
-		if (Input.GetKeyDown(KeyCode.LeftShift) && Energy >= maxEnergy)
-		{
-			Energy = 0;
+			if (onMobileDevice)
+				activatePowerButton.SetActive(true);
 
-			if (specialPower != null)
+			if (Input.GetKeyDown(KeyCode.LeftShift) || powerActivated)
 			{
-				specialPower.transform.position = transform.position;
-				specialPower.SetActive(true);
+				activatePowerButton.SetActive(false);
 
-				specialPowerIsActive = true;
-				specialPowerUI.SetActive(false);
+				Energy = 0;
+
+				if (specialPower != null)
+				{
+					specialPower.transform.position = transform.position;
+					specialPower.SetActive(true);
+
+					specialPowerIsActive = true;
+					specialPowerUI.SetActive(false);
+				}
+				rb.velocity = Vector3.zero;
 			}
-			rb.velocity = Vector3.zero;
 		}
+
 
 		if (specialPowerIsActive == true)
 		{
@@ -168,13 +160,9 @@ public class Spaceship : MonoBehaviour
 		else
 		{
 			if (Input.GetKey(KeyCode.RightArrow))
-			{
 				transform.Rotate(new Vector3(0, rotationSpeed * Time.deltaTime, 0));
-			}
 			if (Input.GetKey(KeyCode.LeftArrow))
-			{
 				transform.Rotate(new Vector3(0, -rotationSpeed * Time.deltaTime, 0));
-			}
 		}
 	}
 
@@ -183,20 +171,14 @@ public class Spaceship : MonoBehaviour
 		if (!onMobileDevice)
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
-			{
 				ManualFire();
-			}
 			else if (Input.GetKey(KeyCode.Space))
-			{
 				AutoFire();
-			}
 		}
 		else
 		{
 			if (shootButton.Pressed)
-			{
 				AutoFire();
-			}
 		}
 	}
 
@@ -204,7 +186,7 @@ public class Spaceship : MonoBehaviour
     {
 		startEnergyRechargeTimer = 0;
 
-		rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
+		rb.AddForce(-transform.forward * shootingForce);
 
 		EnableBullet(shootingPointLeft);
 		shootingEffectLeft.Play();
@@ -221,7 +203,7 @@ public class Spaceship : MonoBehaviour
 		{
 			fireRateTimer = Time.time + 1 / shotsPerSecond;
 
-			rb.AddForce(-transform.forward * shootingForce * Time.deltaTime);
+			rb.AddForce(-transform.forward * shootingForce);
 
 			EnableBullet(shootingPointLeft);
 			shootingEffectLeft.Play();
@@ -238,7 +220,6 @@ public class Spaceship : MonoBehaviour
 		{
 			if (bullet.activeInHierarchy == false)
 			{
-				// Sets the origin to know whick direction to spawn the particles when colliding
 				bullet.GetComponent<BulletBehavior>().SetOriginPos(transform.position);
 
 				bullet.transform.position = _shootingPoint.position;
@@ -250,8 +231,6 @@ public class Spaceship : MonoBehaviour
 
     void KillPlayer()
     {
-		//Instantiate(explosionEffect, transform.position, Quaternion.identity);
-
 		joystick.gameObject.SetActive(false);
 		shootButton.gameObject.SetActive(false);
 
@@ -271,89 +250,52 @@ public class Spaceship : MonoBehaviour
 		if (specialPowerIsActive == false)
 		{
 			if (Energy + energyToAdd <= maxEnergy)
-			{
 				Energy += energyToAdd;
-			}
 			else
-			{
 				Energy = maxEnergy;
-			}
 		}
-		//Debug.Log("Energy: " + Energy);
-		//Debug.Log("Energy Bar: " + GetEnergyBarValue());
 	}
 
     public void ConsumeEnergy(int energyConsumed)
     {
         if (Energy - energyConsumed >= 0)
-        {
             Energy -= energyConsumed;
-        }
         else
-        {
             Energy = 0;
-        }
-        //Debug.Log("Energy: " + Energy);
-        //Debug.Log("Energy Bar: " + GetEnergyBarValue());
     }
 
     public float GetEnergyBarValue()
     {
-        // maxEnergy = 100%
-        // currentEnergy = ?
-
         float currentEnergyPercentage = (Energy * 100) / maxEnergy;
-
-        // Slider values goes from 0.0 to 1.0
-        // So we need de decimal version of the % obtained
         return currentEnergyPercentage / 100;
     }
-    //---------------------------------------------------------------------------- //
 
-
-
-    //------------------------------ PLAYER HEALTH ------------------------------- //
-    public void AddHeath(int healthToAdd)
+	public void AddHeath(int healthToAdd)
     {
         if (Health + healthToAdd <= maxHealth)
-        {
             Health += healthToAdd;
-        }
         else
-        {
             Health = maxHealth;
-        }
-        //Debug.Log("Health: " + Health);
-        //Debug.Log("Health Bar: " + GetHealthBarValue());
     }
 
     public void TakeDamage(int damage)
     {
         if (Health - damage >= 0)
-        {
             Health -= damage;
-        }
         else
-        {
             Health = 0;
-        }
 
 		CameraShake.GetInstance().Shake();
-
-        //Debug.Log("Health: " + Health);
-        //Debug.Log("Health Bar: " + GetHealthBarValue());
     }
 
     public float GetHealthBarValue()
     {
-        // maxHealth = 100%
-        // currentHealth = ?
-
         float currentHealthPercentage = (Health * 100) / maxHealth;
-
-        // Slider values goes from 0.0 to 1.0
-        // So we need de decimal version of the % obtained
         return currentHealthPercentage / 100;
     }
-	//---------------------------------------------------------------------------- //
+
+	public void ActivatePower()
+	{
+		powerActivated = true;
+	}
 }

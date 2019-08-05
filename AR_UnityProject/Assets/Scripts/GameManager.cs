@@ -6,21 +6,25 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 	public Spaceship player;
-
-	public Text unlockedItemText;
-	public GameObject newItemScreen;
-
 	public GameObject gameOverScreen;
+	public GameObject pauseMenuScreen;
 
 	//[HideInInspector]
 	public int enemiesAlive = 0;
 	public int enemiesKilled = 0;
 
 	private int waveNumber;
-    private int waveToUnlockItem;
+	private int waveToUnlockItem;
+
+	private bool onMobileDevice;
 
 	public bool GameOver { get; set; }
 	public int PlayerFinalScore { get; set; }
+	public bool OnMobileDevice
+	{
+		get { return onMobileDevice; }
+	}
+
 
 	#region Singleton
 	private static GameManager instance;
@@ -31,6 +35,12 @@ public class GameManager : MonoBehaviour
 
 	private void Awake()
 	{
+		onMobileDevice = false;
+#if UNITY_ANDROID
+		onMobileDevice = true;
+		Application.targetFrameRate = 60;
+#endif
+
 		instance = this;
 	}
 
@@ -53,33 +63,15 @@ public class GameManager : MonoBehaviour
                 GameOver = true;
                 gameOverScreen.SetActive(true);
             }
+
         }
 
-		/*
-        if (waveNumber >= waveToUnlockItem)
-        {
-            waveToUnlockItem = waveNumber + wavesToUnlockNewItem;
-			if (unlockedItems < inventory.playerItems.Count)
-			{
-				unlockedItemText.text = inventory.playerItems[unlockedItems].name;
-				newItemScreen.SetActive(true);
-				unlockedItems++;
-				Debug.Log("UNLOCKED: " + inventory.playerItems[unlockedItems - 1].name);
-			}
-		}
-
-		if (newItemScreen.activeSelf == true)
+		if (!GameOver && Input.GetKeyDown(KeyCode.Escape))
 		{
-			// Pause game until player presses ENTER
-			Time.timeScale = 0; 
-			if (Input.GetKeyDown(KeyCode.Space))
-			{
-				newItemScreen.SetActive(false);
-				Time.timeScale = 1;
-			}
+			Time.timeScale = 0;
+			pauseMenuScreen.SetActive(true);
 		}
-		*/
-    }
+	}
 
     public void SetWaveNumber(int num) { waveNumber = num; }
 	public int GetWaveNumber() { return waveNumber; }
